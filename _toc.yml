@@ -4,6 +4,7 @@ root: README
 parts:
   - caption: Zero to Mastery Machine Learning
     chapters:
+      - file: 'pytorch_deep_learning/README.md'
 
 parts:
   - caption: PyTorch for Deep Learning
@@ -28,3 +29,4 @@ parts:
 parts:
   - caption: Data Analysis with Python
     chapters:
+      - file: 'pytorch_deep_learning/README.md'
