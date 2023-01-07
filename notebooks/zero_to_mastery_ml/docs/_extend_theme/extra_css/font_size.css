@@ -1,0 +1,14 @@
+/*Change font size in admonition */
+.md-typeset .admonition{
+  font-size: 14px;
+}
+
+
+/*Change font size in table */
+/* https://github.com/squidfunk/mkdocs-material/issues/887 */
+.md-typeset .table,
+.md-typeset .table .td,
+.md-typeset .table .td .th{
+  font-size: 26px;
+}
+

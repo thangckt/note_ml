@@ -1,0 +1,19 @@
+/* Maximum space for text block */
+.md-grid {
+  max-width: 98%;            /* or 100%, if you want to stretch to full-width */
+}
+
+/* @media only screen and (min-width: 76.25em) {
+    .md-main__inner {
+      max-width: none;
+    }
+    .md-sidebar--primary {
+      left: 0;
+    }
+    .md-sidebar--secondary {
+      right: 0;
+      margin-left: 0;
+      -webkit-transform: none;
+      transform: none;
+    }
+  } */
