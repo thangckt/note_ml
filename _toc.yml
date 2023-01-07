@@ -1,5 +1,10 @@
 format: jb-book
 root: README
+
+parts:
+  - caption: Zero to Mastery Machine Learning
+    chapters:
+
 parts:
   - caption: PyTorch for Deep Learning
     chapters:
