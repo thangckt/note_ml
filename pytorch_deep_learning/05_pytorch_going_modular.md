@@ -59,7 +59,7 @@ I usually start machine learning projects in Jupyter/Google Colab notebooks for 
 
 Then when I've got something working, I move the most useful pieces of code to Python scripts.
 
-<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-my-workflow-for-experimenting.png" alt="one possible workflow for writing machine learning code, start with jupyter or google colab notebooks and then move to Python scripts when you've got something working." width=1000/>
+<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-my-workflow-for-experimenting.png" alt="one possible workflow for writing machine learning code, start with jupyter or google colab notebooks and then move to Python scripts when you've got something working." style="width:900px"/>
 
 *There are many possible workflows for writing machine learning code. Some prefer to start with scripts, others (like me) prefer to start with notebooks and go to scripts later on.*
 
@@ -73,7 +73,7 @@ For example, you might be instructed to run code like the following in a termina
 python train.py --model MODEL_NAME --batch_size BATCH_SIZE --lr LEARNING_RATE --num_epochs NUM_EPOCHS
 ```
 
-<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-python-train-command-line-annotated.png" alt="command line call for training a PyTorch model with different hyperparameters" width=1000/>
+<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-python-train-command-line-annotated.png" alt="command line call for training a PyTorch model with different hyperparameters" style="width:900px"/>
 
 *Running a PyTorch `train.py` script on the command line with various hyperparameter settings.*
 
@@ -93,7 +93,7 @@ You could setup any number of these argument flags in your `train.py` script to 
 
 The PyTorch blog post for training state-of-the-art computer vision models uses this style.
 
-<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-training-sota-recipe.png" alt="PyTorch training script recipe for training state of the art computer vision models" width=800/>
+<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-training-sota-recipe.png" alt="PyTorch training script recipe for training state of the art computer vision models" style="width:900px"/>
 
 *PyTorch command line training script recipe for training state-of-the-art computer vision models with 8 GPUs. Source: [PyTorch blog](https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/#the-training-recipe).*
 
@@ -116,7 +116,7 @@ Because sometimes the best way to learn something is to see how it *differs* fro
 
 If you run each notebook side-by-side you'll see how they differ and that's where the key learnings are.
 
-<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-notebook-cell-mode-vs-script-mode.png" alt="running cell mode notebook vs a script mode notebook" width=1000/>
+<img src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/05-notebook-cell-mode-vs-script-mode.png" alt="running cell mode notebook vs a script mode notebook" style="width:900px"/>
 
 *Running the two notebooks for section 05 side-by-side. You'll notice that the **script mode notebook has extra code cells** to turn code from the cell mode notebook into Python scripts.*
 
