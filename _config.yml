@@ -94,4 +94,4 @@ sphinx:
       use_edit_page_button: true
       branch                    : 'main'
   extra_extensions:
-    - sphinx_panels
+    # - sphinx_panels
