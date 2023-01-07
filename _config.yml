@@ -13,7 +13,7 @@ logo: ./notebooks/1images/monkey.png
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks: 'off'     # 'off' force
+  execute_notebooks: 'force'     # 'off' force
   # exclude_patterns            : [_build, "**.ipynb_checkpoints"]  # Patterns to skip when building the book.
 
 
