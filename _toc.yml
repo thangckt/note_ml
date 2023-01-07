@@ -23,3 +23,8 @@ parts:
     - file: 'pytorch_deep_learning/extras/pytorch_extra_resources.md'
     - file: 'pytorch_deep_learning/extras/pytorch_cheatsheet.ipynb'
     - file: 'pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb'
+
+
+parts:
+  - caption: Data Analysis with Python
+    chapters:
