@@ -1,10 +1,10 @@
 format: jb-book
 root: README.md
 
-parts:
-  - caption: Zero to Mastery Machine Learning
-    chapters:
-      - file: 'zero_to_mastery_ml/README.md'
+# parts:
+#   - caption: Zero to Mastery Machine Learning
+#     chapters:
+#       - file: 'zero_to_mastery_ml/README.md'
 
 parts:
   - caption: PyTorch for Deep Learning
@@ -26,7 +26,7 @@ parts:
     - file: 'pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb'
 
 
-parts:
-  - caption: Data Analysis with Python
-    chapters:
-      - file: 'data_analysis_python/README.md'
+# parts:
+#   - caption: Data Analysis with Python
+#     chapters:
+#       - file: 'data_analysis_python/README.md'
