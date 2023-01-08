@@ -76,7 +76,7 @@ launch_buttons:
   colab_url                 : "" # The URL of Google Colab (https://colab.research.google.com)
 
 repository:
-  url                       : "https://github.com/thangckt/note_comp_mech"  # The URL to your book's repository
+  url                       : "https://github.com/thangckt/note_ml"  # The URL to your book's repository
   path_to_book              : ""  # A path to your book's folder, relative to the repository root.
   branch                    : 'main'  # Which branch of the repository should be used when creating links
 
@@ -89,7 +89,7 @@ sphinx:
     # html_js_files: https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
     bibtex_reference_style: author_year  # or label, super, \supercite
     html_theme_options:
-      repository_url: https://github.com/thangckt/note_comp_mech
+      repository_url: https://github.com/thangckt/note_ml
       use_download_button: false   # https://github.com/executablebooks/jupyter-book/issues/1186
       use_edit_page_button: true
       branch                    : 'main'

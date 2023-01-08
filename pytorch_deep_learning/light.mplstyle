@@ -56,7 +56,7 @@ legend.loc : best
 
 ### Figures
 figure.figsize : 3.375, 2.7
-figure.dpi: 300
+figure.dpi: 130
 # figure.facecolor : FDF4D9
 
 ### Saving figures
