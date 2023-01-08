@@ -14,7 +14,7 @@ logo: ./notebooks/1images/monkey.png
 # Execution settings
 execute:
   execute_notebooks: 'off'     # 'off' force
-  # exclude_patterns            : [_build, "**.ipynb_checkpoints"]  # Patterns to skip when building the book.
+  exclude_patterns            : ["*/extras/exercises", "*/extras/solutions"]  # Patterns to skip when building the book.
 
 
 # Add a bibtex file so that we can create citations
