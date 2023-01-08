@@ -19,7 +19,7 @@ execute:
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
-  - notebooks/references.bib
+  - references.bib
 
 #######################################################################################
 # Parse and render settings
@@ -93,5 +93,5 @@ sphinx:
       use_download_button: false   # https://github.com/executablebooks/jupyter-book/issues/1186
       use_edit_page_button: true
       branch                    : 'main'
-  extra_extensions:
+  # extra_extensions:
     # - sphinx_panels
