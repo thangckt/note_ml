@@ -17,7 +17,7 @@ Welcome to the [Zero to Mastery Learn PyTorch for Deep Learning course](https://
 
 | **Section** | **What does it cover?** | **Exercises & Extra-curriculum** | **Slides** |
 | ----- | ----- | ----- | ----- |
-| [00 - PyTorch Fundamentals](00_pytorch_fundamentals/) | Many fundamental PyTorch operations used for deep learning and neural networks. | [Go to exercises & extra-curriculum](00_pytorch_fundamentals/#exercises) | [Go to slides](slides/00_pytorch_and_deep_learning_fundamentals.pdf) |
+| [00 - PyTorch Fundamentals](00_pytorch_fundamentals/) | Many fundamental PyTorch operations used for deep learning and neural networks. | [Go to exercises & extra-curriculum](00_pytorch_fundamentals/#exercises) | [Go to slides](https://thangckt.github.io/note_ml/notebook/slides/00_pytorch_and_deep_learning_fundamentals.pdf) |
 | [01 - PyTorch Workflow](01_pytorch_workflow/) | Provides an outline for approaching deep learning problems and building neural networks with PyTorch. | [Go to exercises & extra-curriculum](01_pytorch_workflow/#exercises) | [Go to slides](slides/01_pytorch_workflow.pdf) |
 | [02 - PyTorch Neural Network Classification](02_pytorch_classification/) | Uses the PyTorch workflow from 01 to go through a neural network classification problem. | [Go to exercises & extra-curriculum](02_pytorch_classification/#exercises) | [Go to slides](slides/02_pytorch_classification.pdf) |
 | [03 - PyTorch Computer Vision](03_pytorch_computer_vision/) | Let's see how PyTorch can be used for computer vision problems using the same workflow from 01 & 02. | [Go to exercises & extra-curriculum](03_pytorch_computer_vision/#exercises) | [Go to slides](slides/03_pytorch_computer_vision.pdf) |
