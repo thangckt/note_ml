@@ -51,7 +51,7 @@ To begin with Google Colab, I'd first go through the [Introduction to Google Col
 
 After you've gotten familiar with the Google Colab interface, you can run any of the course notebooks directly in Google Colab by pressing the "Open in Colab" button at the top of the online book version or the GitHub version.
 
-![open a course notebook in Google Colab via open in Colab button](https://raw.githubusercontent.com/thangckt/pytorch-deep-learning/main/images/setup-open-in-colab-cropped.gif)
+![open a course notebook in Google Colab via open in Colab button](images/setup-open-in-colab-cropped.gif)
 
 If you'd like to make a copy of the notebook and store it on your Google Drive, you can press the "Copy to Drive" button.
 
@@ -59,7 +59,7 @@ If you'd like to make a copy of the notebook and store it on your Google Drive, 
 
 You can also enter any notebook link from GitHub directly in Google Colab and get the same result.
 
-![open a course notebook in Google Colab via GitHub link](https://raw.githubusercontent.com/thangckt/pytorch-deep-learning/main/images/setup-open-notebook-in-colab-via-link.png)
+![open a course notebook in Google Colab via GitHub link](images/setup-open-notebook-in-colab-via-link.png)
 
 Doing this will give you a runable notebook right in Google Colab.
 
@@ -69,7 +69,7 @@ Though this should only be used for testing purposes, as when going through the 
 
 To get access to a CUDA-enabled NVIDIA GPU (CUDA is the programming interface that allows deep learning code to run faster on GPUs) in Google Colab you can go to `Runtime -> Change runtime type -> Hardware Accelerator -> GPU` (note: this will require the runtime to restart).
 
-![Getting access to a GPU in Google Colab](https://raw.githubusercontent.com/thangckt/pytorch-deep-learning/main/images/setup-get-gpu-colab-cropped.gif)
+![Getting access to a GPU in Google Colab](images/setup-get-gpu-colab-cropped.gif)
 
 To check whether you have a GPU active in Google Colab you can run:
 
@@ -161,4 +161,4 @@ print(torch.cuda.is_available())
 
 If the above code runs without errors, you should be ready to go.
 
-If you do run into an error, please refer to the [Learn PyTorch GitHub Discussions page](https://github.com/thangckt/pytorch-deep-learning/discussions) and ask a question or the [PyTorch setup documentation page](https://pytorch.org/get-started/locally/).
+If you do run into an error, please refer to the [Learn PyTorch GitHub Discussions page](https://github.com/mrdbourke/pytorch-deep-learning/discussions) and ask a question or the [PyTorch setup documentation page](https://pytorch.org/get-started/locally/).
