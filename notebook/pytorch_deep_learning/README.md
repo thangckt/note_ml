@@ -4,10 +4,8 @@ Update: Nov 2022
 
 Welcome to the [Zero to Mastery Learn PyTorch for Deep Learning course](https://dbourke.link/ZTMPyTorch), the second best place to learn PyTorch on the internet (the first being the [PyTorch documentation](https://pytorch.org/docs/stable/index.html)).
 
-<div align="center">
-    <img src="images/misc-pytorch-course-launch-cover-white-text-black-background.jpg" width=750 alt=""/> <br>
-    <em>pytorch deep learning by zero to mastery cover photo with different sections of the course <em>
-</div>
+<img src="notebook/images/misc-pytorch-course-launch-cover-white-text-black-background.jpg" width=750 alt=""/> <br>
+*pytorch deep learning by zero to mastery cover photo with different sections of the course*
 
 ## Course materials/outline
 
