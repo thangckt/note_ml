@@ -15,7 +15,7 @@ author: thangckt
 execute:
   execute_notebooks: 'off'     # 'off' force
   exclude_patterns     : ["**/extras/exercises/*.ipynb", "**/extras/solutions/*.ipynb"]  # Patterns to skip when building the book.
-# only_build_toc_files: true
+only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
