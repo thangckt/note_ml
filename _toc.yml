@@ -26,12 +26,12 @@ parts:
     - file: notebook/pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb
 
 
-parts:
-  - caption: Data Analysis with Python
-    chapters:
-      - file: notebook/data_analysis_python/README.md
+# parts:
+#   - caption: Data Analysis with Python
+#     chapters:
+#       - file: notebook/data_analysis_python/README.md
 
-parts:
-  - caption: Somes Coding Notes
-    chapters:
-      - file: notebook/code_tip/README.md
+# parts:
+#   - caption: Somes Coding Notes
+#     chapters:
+#       - file: notebook/code_tip/README.md
