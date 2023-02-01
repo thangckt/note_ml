@@ -16,6 +16,8 @@ parts:
         - file: notebook/basic_MLDL/2_1_dl_neural_network.ipynb
         - file: notebook/basic_MLDL/2_2_layers.ipynb
 
+      - file: notebook/basic_MLDL/3_1_workflow.ipynb
+
 
   - caption: PyTorch for Deep Learning
     chapters:
