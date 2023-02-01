@@ -1,12 +1,4 @@
-# Getting setup to code PyTorch
-
-Setting up a machine for coding deep learning can be quite involved.
-
-From hardware to software to all of the little bits and pieces to make your code run on someone else's machine just like it ran on yours.
-
-For the sake of this course, we're keeping things simple.
-
-Though not so simple you won't be able to use what you're using here elsewhere.
+# Setup to code PyTorch
 
 There are two setup options. One is easier than the other but the other offers more options in the long-run.
 

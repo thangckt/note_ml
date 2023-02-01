@@ -20,8 +20,6 @@ parts:
   - caption: PyTorch for Deep Learning
     chapters:
       - file: notebook/pytorch_deep_learning/00_overview.md
-      - file: notebook/pytorch_deep_learning/how_to_setup.md
-
       - file: notebook/pytorch_deep_learning/00_pytorch_fundamentals.ipynb
       - file: notebook/pytorch_deep_learning/01_pytorch_workflow.ipynb
       - file: notebook/pytorch_deep_learning/02_pytorch_classification.ipynb
@@ -36,6 +34,7 @@ parts:
       - file: notebook/pytorch_deep_learning/extras/pytorch_extra_resources.md
       - file: notebook/pytorch_deep_learning/extras/pytorch_cheatsheet.ipynb
       - file: notebook/pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb
+      - file: notebook/pytorch_deep_learning/extras/pytorch_setup.md
 
 
   - caption: Zero to Mastery Machine Learning
