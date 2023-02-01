@@ -1,6 +1,6 @@
-# Learn PyTorch for Deep Learning
+# Overview
 
-Welcome to the [Zero to Mastery Learn PyTorch for Deep Learning course](https://dbourke.link/ZTMPyTorch), the second best place to learn PyTorch on the internet (the first being the [PyTorch documentation](https://pytorch.org/docs/stable/index.html)).
+Adapted from [Learn PyTorch for Deep Learning: Zero to Mastery](https://www.learnpytorch.io/), the second best place to learn PyTorch on the internet (the first being the [PyTorch documentation](https://pytorch.org/docs/stable/index.html)).
 
 <img src="images/misc-pytorch-course-launch-cover-white-text-black-background.jpg" width=750 alt=""/> <br>
 *pytorch deep learning by zero to mastery cover photo with different sections of the course*
@@ -11,7 +11,8 @@ Welcome to the [Zero to Mastery Learn PyTorch for Deep Learning course](https://
 * 🎥 **First five sections on YouTube:** Learn Pytorch in a day by watching the [first 25-hours of material](https://youtu.be/Z_ikDlimN6A).
 * 🔬 **Course focus:** code, code, code, experiment, experiment, experiment.
 * 🏃‍♂️ **Teaching style:** [https://sive.rs/kimo](https://sive.rs/kimo).
-* 🤔 **Ask a question:** See the [GitHub Discussions page](https://github.com/thangckt/pytorch-deep-learning/discussions) for existing questions/ask your own.
+* 🤔 **Ask a question:** See the [GitHub Discussions page](https://github.com/mrdbourke/pytorch-deep-learning/discussions) for existing questions/ask your own.
+* See the project page for [work-in-progress board](https://github.com/users/mrdbourke/projects/1/views/1)
 
 | **Section** | **What does it cover?** | **Exercises & Extra-curriculum** | **Slides** |
 | ----- | ----- | ----- | ----- |
@@ -28,11 +29,6 @@ Welcome to the [Zero to Mastery Learn PyTorch for Deep Learning course](https://
 | [PyTorch Extra Resources](pytorch_extra_resources/) | This course covers a large amount of PyTorch and deep learning but the field of machine learning is vast, inside here you'll find recommended books and resources for: PyTorch and deep learning, ML engineering, NLP (natural language processing), time series data, where to find datasets and more. | - | - |
 | [PyTorch Cheatsheet](pytorch_cheatsheet/) | A very quick overview of some of the main features of PyTorch plus links to various resources where more can be found in the course and in the PyTorch documentation. | - | - |
 
-## Status
-
-All materials completed and videos published on Zero to Mastery!
-
-See the project page for [work-in-progress board](https://github.com/users/mrdbourke/projects/1/views/1)
 
 ## About this course
 
@@ -94,13 +90,3 @@ These milestone projects will help you practice using PyTorch to cover important
 You can read the materials on any device but this course is best viewed and coded along within a desktop browser.
 
 The course uses a free tool called Google Colab. If you've got no experience with it, I'd go through the free [Introduction to Google Colab tutorial](https://colab.research.google.com/notebooks/basic_features_overview.ipynb) and then come back here.
-
-To start:
-
-1. Click on one of the notebook or section links above like "[00. PyTorch Fundamentals](00_pytorch_fundamentals/)".
-2. Click the "Open in Colab" button up the top.
-3. Press SHIFT+Enter a few times and see what happens.
-
-### My question isn't answered
-
-Please leave a [discussion](https://github.com/mrdbourke/pytorch-deep-learning/discussions) or send me an email directly: daniel (at) mrdbourke (dot) com.
