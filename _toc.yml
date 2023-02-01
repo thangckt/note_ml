@@ -1,36 +1,41 @@
+## No "-" before "chapter" "section"
+
 format: jb-book
 root: notebook/README.md
 
 parts:
-  - caption: Basic of Mechine Learning & Deep Learning
+  - caption: Basic of Mechine Learning - Deep Learning
     chapters:
       - file: notebook/basic_MLDL/1_0_ml_overview.ipynb
-      - sections:
+        sections:
         - file: notebook/basic_MLDL/1_1_ml_supervised_unsuppersives.ipynb
         - file: notebook/basic_MLDL/1_2_regression.ipynb
+
       - file: notebook/basic_MLDL/2_0_dl_overview.ipynb
-      - sections:
+        sections:
         - file: notebook/basic_MLDL/2_1_dl_neural_network.ipynb
         - file: notebook/basic_MLDL/2_2_layers.ipynb
 
 
   - caption: PyTorch for Deep Learning
     chapters:
-    - file: notebook/pytorch_deep_learning/00_overview.md
-    - file: notebook/pytorch_deep_learning/how_to_setup.md
-    - file: notebook/pytorch_deep_learning/00_pytorch_fundamentals.ipynb
-    - file: notebook/pytorch_deep_learning/01_pytorch_workflow.ipynb
-    - file: notebook/pytorch_deep_learning/02_pytorch_classification.ipynb
-    - file: notebook/pytorch_deep_learning/03_pytorch_computer_vision.ipynb
-    - file: notebook/pytorch_deep_learning/04_pytorch_custom_datasets.ipynb
-    - file: notebook/pytorch_deep_learning/05_pytorch_going_modular.md
-    - file: notebook/pytorch_deep_learning/06_pytorch_transfer_learning.ipynb
-    - file: notebook/pytorch_deep_learning/07_pytorch_experiment_tracking.ipynb
-    - file: notebook/pytorch_deep_learning/08_pytorch_paper_replicating.ipynb
-    - file: notebook/pytorch_deep_learning/09_pytorch_model_deployment.ipynb
-    - file: notebook/pytorch_deep_learning/extras/pytorch_extra_resources.md
-    - file: notebook/pytorch_deep_learning/extras/pytorch_cheatsheet.ipynb
-    - file: notebook/pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb
+      - file: notebook/pytorch_deep_learning/00_overview.md
+      - file: notebook/pytorch_deep_learning/how_to_setup.md
+
+      - file: notebook/pytorch_deep_learning/00_pytorch_fundamentals.ipynb
+      - file: notebook/pytorch_deep_learning/01_pytorch_workflow.ipynb
+      - file: notebook/pytorch_deep_learning/02_pytorch_classification.ipynb
+      - file: notebook/pytorch_deep_learning/03_pytorch_computer_vision.ipynb
+      - file: notebook/pytorch_deep_learning/04_pytorch_custom_datasets.ipynb
+      - file: notebook/pytorch_deep_learning/05_pytorch_going_modular.md
+      - file: notebook/pytorch_deep_learning/06_pytorch_transfer_learning.ipynb
+      - file: notebook/pytorch_deep_learning/07_pytorch_experiment_tracking.ipynb
+      - file: notebook/pytorch_deep_learning/08_pytorch_paper_replicating.ipynb
+      - file: notebook/pytorch_deep_learning/09_pytorch_model_deployment.ipynb
+
+      - file: notebook/pytorch_deep_learning/extras/pytorch_extra_resources.md
+      - file: notebook/pytorch_deep_learning/extras/pytorch_cheatsheet.ipynb
+      - file: notebook/pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb
 
 
   - caption: Zero to Mastery Machine Learning
