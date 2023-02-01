@@ -4,7 +4,7 @@ format: jb-book
 root: notebook/README.md
 
 parts:
-  - caption: Basic of Mechine Learning - Deep Learning
+  - caption: Basic of ML & DL
     chapters:
       - file: notebook/basic_MLDL/1_0_ml_overview.ipynb
         sections:

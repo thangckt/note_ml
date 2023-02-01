@@ -7,7 +7,7 @@ Adapted from [Learn PyTorch for Deep Learning: Zero to Mastery](https://www.lear
 
 ## Course materials/outline
 
-* 📖 **Online book version:** All of course materials are available in a readable online book at [learnpytorch.io](https://learnpytorch.io).
+* 📖 **Online book version:** All of the course materials are available in a readable online book at [learnpytorch.io](https://learnpytorch.io).
 * 🎥 **First five sections on YouTube:** Learn Pytorch in a day by watching the [first 25-hours of material](https://youtu.be/Z_ikDlimN6A).
 * 🔬 **Course focus:** code, code, code, experiment, experiment, experiment.
 * 🏃‍♂️ **Teaching style:** [https://sive.rs/kimo](https://sive.rs/kimo).
