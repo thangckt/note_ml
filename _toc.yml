@@ -38,6 +38,10 @@ parts:
       - file: notebook/pytorch_deep_learning/extras/pytorch_most_common_errors.ipynb
       - file: notebook/pytorch_deep_learning/extras/pytorch_setup.md
 
+  - caption: Practices
+    chapters:
+      - file: notebook/1_Practices/1_PT_Linear_Regression.ipynb
+
 
   - caption: Zero to Mastery Machine Learning
     chapters:
