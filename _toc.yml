@@ -41,6 +41,7 @@ parts:
   - caption: Practices
     chapters:
       - file: notebook/1_Practices/1_PT_Linear_Regression.ipynb
+      - file: notebook/1_Practices/2_PT_Logistic_Regression.ipynb
 
 
   - caption: Zero to Mastery Machine Learning
