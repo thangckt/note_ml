@@ -6,17 +6,17 @@ root: notebook/README.md
 parts:
   - caption: Basic of ML & DL
     chapters:
-      - file: notebook/basic_MLDL/1_0_ml_overview.ipynb
+      - file: notebook/0_basic_MLDL/1_0_ml_overview.ipynb
         sections:
-        - file: notebook/basic_MLDL/1_1_ml_supervised_unsuppersives.ipynb
-        - file: notebook/basic_MLDL/1_2_regression.ipynb
+        - file: notebook/0_basic_MLDL/1_1_ml_supervised_unsuppersives.ipynb
+        - file: notebook/0_basic_MLDL/1_2_regression.ipynb
 
-      - file: notebook/basic_MLDL/2_0_dl_overview.ipynb
+      - file: notebook/0_basic_MLDL/2_0_dl_overview.ipynb
         sections:
-        - file: notebook/basic_MLDL/2_1_dl_neural_network.ipynb
-        - file: notebook/basic_MLDL/2_2_layers.ipynb
+        - file: notebook/0_basic_MLDL/2_1_dl_neural_network.ipynb
+        - file: notebook/0_basic_MLDL/2_2_layers.ipynb
 
-      - file: notebook/basic_MLDL/3_1_workflow.ipynb
+      - file: notebook/0_basic_MLDL/3_1_workflow.ipynb
 
 
   - caption: PyTorch for Deep Learning
