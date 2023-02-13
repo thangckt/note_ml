@@ -59,3 +59,4 @@ parts:
       - file: notebook/2_code_tips/README.md
       - file: notebook/2_code_tips/1_jupyter_notebook.ipynb
       - file: notebook/2_code_tips/2_Matplotlib.ipynb
+      - file: notebook/2_code_tips/3_Ovito.ipynb
