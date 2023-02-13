@@ -54,6 +54,8 @@ parts:
       - file: notebook/data_analysis_python/README.md
 
 
-  - caption: Somes Coding Notes
+  - caption: Coding Notes
     chapters:
-      - file: notebook/code_tip/README.md
+      - file: notebook/2_code_tips/README.md
+      - file: notebook/2_code_tips/1_jupyter_notebook.ipynb
+      - file: notebook/2_code_tips/2_Matplotlib.ipynb
