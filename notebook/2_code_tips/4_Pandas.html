@@ -1,0 +1,1007 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>work with Pandas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/2_code_tips/4_Pandas';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Visuallize by Ovito" href="3_Ovito.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title"></p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic of ML &amp; DL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0_basic_MLDL/1_0_ml_overview.html">Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/1_1_ml_supervised_unsuppersives.html">Supervised vs. Unsuppervised</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/1_2_regression.html">Regression &amp; Model Assessment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0_basic_MLDL/2_0_dl_overview.html">Deep Learning Overview</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/2_1_dl_neural_network.html">What is a neural network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/2_2_layers.html">Standard Layers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../0_basic_MLDL/3_1_workflow.html">Workflow in ML</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_pytorch_fundamentals.html">00. PyTorch Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/01_pytorch_workflow.html">01. PyTorch Workflow Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/02_pytorch_classification.html">02. PyTorch Neural Network Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/03_pytorch_computer_vision.html">03. PyTorch Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/04_pytorch_custom_datasets.html">04. PyTorch Custom Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/05_pytorch_going_modular.html">05. PyTorch Going Modular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/06_pytorch_transfer_learning.html">06. PyTorch Transfer Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/07_pytorch_experiment_tracking.html">07. PyTorch Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/08_pytorch_paper_replicating.html">08. PyTorch Paper Replicating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/09_pytorch_model_deployment.html">09. PyTorch Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_extra_resources.html">PyTorch Extra Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_cheatsheet.html">PyTorch Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_most_common_errors.html">The Three Most Common Errors in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_setup.html">Setup to code PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/1_PT_Linear_Regression.html">Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/2_PT_Logistic_Regression.html">Logistic Regression</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Zero to Mastery Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../zero_to_mastery_ml/README.html">Zero to Mastery Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_analysis_python/README.html">hello</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="README.html">hello</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_jupyter_notebook.html">Jupyter Notebook</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="2_Matplotlib.html">Tips to use Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Ovito.html">Visuallize by Ovito</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">work with Pandas</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/thangckt/note_ml/edit/main/notebook/2_code_tips/4_Pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button"
+   title="Suggest edit"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>work with Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">work with Pandas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#many-ways-to-create-dataframe">1. Many ways to create DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-data-from-dataframe">2. Extract data from DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-column">Extract column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-value-for-dataframe">3. assign value for DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#change-column-names-and-row-indexes-in-pandas">Change Column Names and Row Indexes in Pandas?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files">Read files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-path-of-the-current-ipynb-file-from-within-ipython">the path of the current ipynb file from within IPython?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-matplotlib">note on Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disable-ipython-notebook-autoscrolling">Disable iPython Notebook Autoscrolling</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-indexing">4. Hierarchical indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-on-axis-with-multiindex">Basic indexing on axis with MultiIndex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-mean-across-multiple-pandas-dataframes">Get the mean across multiple Pandas DataFrames</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-combine-multiple-dataframes">II. Combine multiple DataFrames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="work-with-pandas">
+<h1>work with Pandas<a class="headerlink" href="#work-with-pandas" title="Permalink to this heading">#</a></h1>
+<section id="many-ways-to-create-dataframe">
+<h2>1. Many ways to create DataFrame<a class="headerlink" href="#many-ways-to-create-dataframe" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/different-ways-to-create-pandas-dataframe/">https://www.geeksforgeeks.org/different-ways-to-create-pandas-dataframe/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>     <span class="c1"># no colume-name, no row-names</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;col1&#39;</span><span class="p">,</span> <span class="s1">&#39;col2&#39;</span><span class="p">,</span> <span class="s1">&#39;col3&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index1&#39;</span><span class="p">,</span> <span class="s1">&#39;index2&#39;</span><span class="p">])</span>  <span class="c1"># with colume-name and row-names</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index1&#39;</span><span class="p">,</span> <span class="s1">&#39;index2&#39;</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 3 4]
+ [5 6 7]] 
+
+   0  1  2
+0  2  3  4
+1  5  6  7 
+
+        col1  col2  col3
+index1     2     3     4
+index2     5     6     7 
+
+        0  1  2
+index1  2  3  4
+index2  5  6  7 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-data-from-dataframe">
+<h2>2. Extract data from DataFrame<a class="headerlink" href="#extract-data-from-dataframe" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://stackoverflow.com/questions/11285613/selecting-multiple-columns-in-a-pandas-dataframe">https://stackoverflow.com/questions/11285613/selecting-multiple-columns-in-a-pandas-dataframe</a></p>
+<ul class="simple">
+<li><p>loc gets rows (or columns) with particular labels from the index.</p></li>
+<li><p>iloc gets rows (or columns) at particular positions in the index (so it only takes integers).
+Here s.iloc[:6] returns the first 6 rows of the Series as expected. However, s.loc[:6] raises a KeyError since 6 is not in the index.
+<a class="reference external" href="https://stackoverflow.com/questions/31593201/how-are-iloc-ix-and-loc-different">https://stackoverflow.com/questions/31593201/how-are-iloc-ix-and-loc-different</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. access by column-name</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">c</span><span class="p">[[</span><span class="s1">&#39;col1&#39;</span><span class="p">,</span><span class="s1">&#39;col3&#39;</span><span class="p">]]</span>      <span class="c1"># produce a copy </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># 2. access by integer index</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>        
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        col1  col3
+index1     2     4
+index2     5     7
+        col1  col3
+index1     2     4
+index2     5     7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>          <span class="c1">#  not produce copy</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>          <span class="c1">#  produce copy, To avoid the case where changing df1 also changes df</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        col1  col3
+index1     2     4
+index2     5     7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3.To index a DataFrame with integer rows and named columns (labeled columns):</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;NAME&#39;</span><span class="p">]</span>              <span class="c1">#      where i is a valid integer index and NAME is the name of the column.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-column">
+<h2>Extract column<a class="headerlink" href="#extract-column" title="Permalink to this heading">#</a></h2>
+<p>df[‘col1’] or df.col1</p>
+</section>
+<section id="assign-value-for-dataframe">
+<h2>3. assign value for DataFrame<a class="headerlink" href="#assign-value-for-dataframe" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create Zeros Frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="o">+</span><span class="p">[</span><span class="s2">&quot;LCmean&quot;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LC1</th>
+      <th>LC2</th>
+      <th>LC3</th>
+      <th>LCmean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Extract value</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   LC1  LC2  LC3  LCmean
+0  0.0  0.0  0.0     0.0
+1  0.0  1.0  2.0     3.0
+2  0.0  0.0  0.0   100.0 
+
+   LC1  LC2  LC3  LCmean
+0  0.0  0.0  0.0     0.0
+1  0.0  1.0  2.0     3.0
+2  0.0  0.0  0.0   100.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## mean of each column</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LC1        0.000000
+LC2        0.333333
+LC3        0.666667
+LCmean    34.333333
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="change-column-names-and-row-indexes-in-pandas">
+<h1>Change Column Names and Row Indexes in Pandas?<a class="headerlink" href="#change-column-names-and-row-indexes-in-pandas" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://cmdlinetips.com/2018/03/how-to-change-column-names-and-row-indexes-in-pandas/">https://cmdlinetips.com/2018/03/how-to-change-column-names-and-row-indexes-in-pandas/</a></p>
+<ul class="simple">
+<li><p>df.columns assign new names directly –&gt; set for all columns</p></li>
+<li><p>df.rename(…)      –&gt; can change name of 1 column</p></li>
+</ul>
+<section id="read-files">
+<h2>Read files<a class="headerlink" href="#read-files" title="Permalink to this heading">#</a></h2>
+<p>Use pd.read_fwf() to read files with fixed-width. But this looks ugly, so use np.loadtxt, after that convert data into pandas frame
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html</a></p>
+<section id="the-path-of-the-current-ipynb-file-from-within-ipython">
+<h3>the path of the current ipynb file from within IPython?<a class="headerlink" href="#the-path-of-the-current-ipynb-file-from-within-ipython" title="Permalink to this heading">#</a></h3>
+<p><a class="github reference external" href="https://github.com/ipython/ipython/issues/10123">ipython/ipython#10123</a></p>
+<p>myInfo01 = !echo %cd% # under windows
+myInfo02 = !pwd # under linux/mac</p>
+</section>
+</section>
+<section id="note-on-matplotlib">
+<h2>note on Matplotlib<a class="headerlink" href="#note-on-matplotlib" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>if use subplot: plt.sth = ax1.set_sth</p></li>
+</ul>
+</section>
+<section id="disable-ipython-notebook-autoscrolling">
+<h2>Disable iPython Notebook Autoscrolling<a class="headerlink" href="#disable-ipython-notebook-autoscrolling" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Individual cells:</p></li>
+</ul>
+<ul class="simple">
+<li><p>Cell-&gt;Current Outputs-&gt;Toggle Scrolling</p></li>
+<li><p>right-click on output –&gt; disable Crolling</p></li>
+</ul>
+<ul class="simple">
+<li><p>All cells: Cell-&gt;All Outputs-&gt;Toggle Scrolling</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="hierarchical-indexing">
+<h1>4. Hierarchical indexing<a class="headerlink" href="#hierarchical-indexing" title="Permalink to this heading">#</a></h1>
+<p>for working with higher dimensional data: 3d, 4d,…
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html">https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html</a></p>
+<ul class="simple">
+<li><p>NOTE: iloc, loc, ix : just use to extract index (row), cannot use to extract columns. For extracting column, must use df[‘col’]</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">])]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">arrays</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>0.083715</td>
+      <td>-0.161591</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-1.714780</td>
+      <td>-1.211817</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>-1.172680</td>
+      <td>0.652009</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.814605</td>
+      <td>0.643798</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">foo</th>
+      <th>one</th>
+      <td>-0.530733</td>
+      <td>-0.858860</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.623773</td>
+      <td>0.473498</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">qux</th>
+      <th>one</th>
+      <td>-0.158116</td>
+      <td>0.578128</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1.707150</td>
+      <td>-0.429988</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MultiIndex([(&#39;bar&#39;, &#39;one&#39;),
+            (&#39;bar&#39;, &#39;two&#39;),
+            (&#39;baz&#39;, &#39;one&#39;),
+            (&#39;baz&#39;, &#39;two&#39;),
+            (&#39;foo&#39;, &#39;one&#39;),
+            (&#39;foo&#39;, &#39;two&#39;),
+            (&#39;qux&#39;, &#39;one&#39;),
+            (&#39;qux&#39;, &#39;two&#39;)],
+           )
+[[&#39;bar&#39;, &#39;baz&#39;, &#39;foo&#39;, &#39;qux&#39;], [&#39;one&#39;, &#39;two&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.08371492, -0.16159087],
+       [-1.71477955, -1.21181671],
+       [-1.17267952,  0.65200889],
+       [-0.81460496,  0.64379787],
+       [-0.5307326 , -0.85886016],
+       [ 0.62377341,  0.47349806],
+       [-0.158116  ,  0.57812815],
+       [ 1.70715025, -0.42998762]])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="basic-indexing-on-axis-with-multiindex">
+<h2>Basic indexing on axis with MultiIndex<a class="headerlink" href="#basic-indexing-on-axis-with-multiindex" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#basic-indexing-on-axis-with-multiindex">https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#basic-indexing-on-axis-with-multiindex</a></p>
+<ul class="simple">
+<li><p>axis with multiIndex, use form of tuples: df.loc[(‘bar’, ‘two’)]</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td>0.083715</td>
+      <td>-0.161591</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-1.714780</td>
+      <td>-1.211817</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span><span class="s1">&#39;one&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0.083715
+1   -0.161591
+Name: (bar, one), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>one    0.083715
+two   -1.714780
+Name: 0, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-the-mean-across-multiple-pandas-dataframes">
+<h2>Get the mean across multiple Pandas DataFrames<a class="headerlink" href="#get-the-mean-across-multiple-pandas-dataframes" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://stackoverflow.com/questions/25057835/get-the-mean-across-multiple-pandas-dataframes">https://stackoverflow.com/questions/25057835/get-the-mean-across-multiple-pandas-dataframes</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td>-0.444453</td>
+      <td>0.052422</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.049615</td>
+      <td>-0.131127</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ii-combine-multiple-dataframes">
+<h1>II. Combine multiple DataFrames<a class="headerlink" href="#ii-combine-multiple-dataframes" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://www.kite.com/blog/python/pandas-merge-join-concat/">https://www.kite.com/blog/python/pandas-merge-join-concat/</a>  <br>
+*</p>
+<section id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this heading">#</a></h2>
+<p>Regex multiple conditions in pandas <code class="docutils literal notranslate"><span class="pre">df.filter(regex='ti|d')</span></code></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook/2_code_tips"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_Ovito.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Visuallize by Ovito</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">work with Pandas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#many-ways-to-create-dataframe">1. Many ways to create DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-data-from-dataframe">2. Extract data from DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-column">Extract column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-value-for-dataframe">3. assign value for DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#change-column-names-and-row-indexes-in-pandas">Change Column Names and Row Indexes in Pandas?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files">Read files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-path-of-the-current-ipynb-file-from-within-ipython">the path of the current ipynb file from within IPython?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-matplotlib">note on Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disable-ipython-notebook-autoscrolling">Disable iPython Notebook Autoscrolling</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-indexing">4. Hierarchical indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing-on-axis-with-multiindex">Basic indexing on axis with MultiIndex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-mean-across-multiple-pandas-dataframes">Get the mean across multiple Pandas DataFrames</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-combine-multiple-dataframes">II. Combine multiple DataFrames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By thangckt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
