@@ -17,6 +17,7 @@ parts:
         - file: notebook/0_basic_MLDL/2_2_layers.ipynb
 
       - file: notebook/0_basic_MLDL/3_1_workflow.ipynb
+      - file: notebook/0_basic_MLDL/3_2_Model_template.ipynb
 
 
   - caption: PyTorch for Deep Learning
