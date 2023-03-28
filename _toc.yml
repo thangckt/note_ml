@@ -55,7 +55,7 @@ parts:
       - file: notebook/data_analysis_python/README.md
 
 
-  - caption: Coding Notes
+  - caption: Code snippets
     chapters:
       - file: notebook/2_code_tips/README.md
       - file: notebook/2_code_tips/1_jupyter_notebook.ipynb
