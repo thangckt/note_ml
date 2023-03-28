@@ -62,3 +62,4 @@ parts:
       - file: notebook/2_code_tips/2_Matplotlib.ipynb
       - file: notebook/2_code_tips/3_Ovito.ipynb
       - file: notebook/2_code_tips/4_Pandas.ipynb
+      - file: notebook/2_code_tips/5_Regular_Expressions.ipynb
