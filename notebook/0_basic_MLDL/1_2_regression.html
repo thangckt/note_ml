@@ -1,0 +1,1368 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Regression &amp; Model Assessment</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/0_basic_MLDL/1_2_regression';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Deep Learning Overview" href="2_0_dl_overview.html" />
+    <link rel="prev" title="Supervised vs. Unsuppervised" href="1_1_ml_supervised_unsuppersives.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title"></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic of ML &amp; DL</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="1_0_ml_overview.html">Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_1_ml_supervised_unsuppersives.html">Supervised vs. Unsuppervised</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Regression &amp; Model Assessment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2_0_dl_overview.html">Deep Learning Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_1_dl_neural_network.html">What is a neural network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_2_layers.html">Standard Layers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="3_1_workflow.html">Workflow in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_Model_template.html">Core Ml templates</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_pytorch_fundamentals.html">00. PyTorch Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/01_pytorch_workflow.html">01. PyTorch Workflow Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/02_pytorch_classification.html">02. PyTorch Neural Network Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/03_pytorch_computer_vision.html">03. PyTorch Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/04_pytorch_custom_datasets.html">04. PyTorch Custom Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/05_pytorch_going_modular.html">05. PyTorch Going Modular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/06_pytorch_transfer_learning.html">06. PyTorch Transfer Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/07_pytorch_experiment_tracking.html">07. PyTorch Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/08_pytorch_paper_replicating.html">08. PyTorch Paper Replicating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/09_pytorch_model_deployment.html">09. PyTorch Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_extra_resources.html">PyTorch Extra Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_cheatsheet.html">PyTorch Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_most_common_errors.html">The Three Most Common Errors in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_setup.html">Setup to code PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Zero to Mastery Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../zero_to_mastery_ml/README.html">Zero to Mastery Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/1_PT_Linear_Regression.html">Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/2_PT_Logistic_Regression.html">Logistic Regression</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/thangckt/note_ml/edit/main/notebook/0_basic_MLDL/1_2_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button"
+   title="Suggest edit"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regression & Model Assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-with-synthetic-data">Overfitting with Synthetic Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-conclusion">Overfitting Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-effect-of-feature-number">Exploring Effect of Feature Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-decomposition">Bias Variance Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">L2 Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l1-regularization">L1 Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-to-assess-models">Strategies to Assess Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">k-Fold Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cv">Leave-one-out CV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-other-measures">Computing Other Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-resampling">Bootstrap Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jacknife">Jacknife+</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">Training Data Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">Leave One Class Out Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">Model Assessment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regression-model-assessment">
+<h1>Regression &amp; Model Assessment<a class="headerlink" href="#regression-model-assessment" title="Permalink to this heading">#</a></h1>
+<p>Regression is supervised learning with continuous (or sometimes discrete) labels. You are given labeled data consisting of features and labels <span class="math notranslate nohighlight">\(\{\vec{x}_i, y_i\}\)</span>. The goal is to find a function that describes their relationship, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) = \hat{y}\)</span>. A more formal discussion of the concepts discussed here can be found in Chapter 3 of Bishop’s Pattern Recognition and Machine Learning<span id="id1">[]</span>.</p>
+<div class="admonition-objectives admonition">
+<p class="admonition-title">Objectives</p>
+<p>This lecture introduces some probability theory, especially expectations. You can get a refresher of <a class="reference external" href="https://whitead.github.io/numerical_stats/">probability of random variables</a> and/or <a class="reference external" href="https://whitead.github.io/numerical_stats/unit_4/lectures/lecture_2.pdf">expectations</a>. Recall an expectation is <span class="math notranslate nohighlight">\(E[x] = \sum P(x)x\)</span> and variance is <span class="math notranslate nohighlight">\(E[\left(x - E[x]\right)^2]\)</span>. We also use and discuss <a class="reference external" href="https://nbviewer.jupyter.org/github/whitead/numerical_stats/blob/master/unit_12/lectures/lecture_1.ipynb#Extending-Least-Squares-to-Multiple-Dimensions-in-Domain---OLS-ND">linear regression techniques</a>. After completing this chapter, you should be able to:</p>
+<ul class="simple">
+<li><p>Perform multi-dimensional regression with a loss function</p></li>
+<li><p>Understand how to and why we batch</p></li>
+<li><p>Understand splitting of data</p></li>
+<li><p>Reason about model bias and model variance</p></li>
+<li><p>Assess model fit and generalization error</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.example_libraries</span> <span class="kn">import</span> <span class="n">optimizers</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="c1"># import dmol</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>  <span class="p">{</span>
+        <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+        <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="o">/</span><span class="mf">1.3</span><span class="p">),</span>
+        <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">130</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.left&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.bottom&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;image.cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;gist_yarg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lines.markersize&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>    
+        <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll be working again with the AqSolDB<span id="id2">[]</span> dataset. It has about 10,000 unique compounds with measured solubility in water (label) and 17 molecular descriptors (features).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># soldata = pd.read_csv(&#39;https://dataverse.harvard.edu/api/access/datafile/3407241?format=original&amp;gbrecs=true&#39;)</span>
+<span class="n">soldata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="s2">&quot;https://github.com/whitead/dmol-book/raw/main/data/curated-solubility-dataset.csv&quot;</span><span class="p">)</span>
+<span class="n">features_start_at</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;MolWt&quot;</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">features_start_at</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this heading">#</a></h2>
+<p>We need to create a <em>better assessment</em> of our supervised ML models. The goal of our ML model is to predict solubility of <em>new unseen</em> molecules. Therefore, to assess we should test on unseen molecules. We will split our data into two subsets: <strong>training data</strong> and <strong>testing data</strong>. Typically this is done with an 80%/20%, so that you train on 80% of your data and test on the remaining 20%. In our case, we’ll just do 50%/50% because we have plenty of data and thus do not need to take 80% for training. We’ll be using a subset, 50 molecules chosen randomly, rather than the whole dataset. So we’ll have 25 training molecules and 25 testing molecules.</p>
+<p>Let’s begin by seeing what effect the split of train/test has on our linear model introduced in the previous chapter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get 50 points and split into train/test</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[:</span><span class="mi">25</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="mi">25</span><span class="p">:]</span>
+
+<span class="c1"># standardize the features using only train</span>
+<span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">/=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">/=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="c1"># convert from pandas dataframe to numpy arrays</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will again use a linear model,  <span class="math notranslate nohighlight">\( \hat{y} = \vec{w}\vec{x} + b \)</span>. One change we’ll make is using the <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.html#jax.jit">&#64;jit</a> decorator from <code class="docutils literal notranslate"><span class="pre">jax</span></code>. This decorator will tell <code class="docutils literal notranslate"><span class="pre">jax</span></code> to inspect our function, simplify it, and compile it to run quickly on a GPU (if available) or CPU. The rest of our work is the same as the previous chapter. We begin with defining our loss, which is mean squared error (MSE) again.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>A decorator is a Python-specific syntax that modifies how a function behaves. It is
+indicated with the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol. Examples include caching results, compiling the function, running
+it in parallel, and timing its execution.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define our loss function</span>
+<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># initiate parameters</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(DeviceArray([10.141863  , -4.9939833 ,  9.95828   , 10.228883  ,
+               7.601961  ,  2.9322498 ,  8.171559  ,  5.15272   ,
+               9.97174   ,  6.3993273 , -1.2473229 ,  0.06772845,
+               2.7432702 ,  7.425468  , 10.416208  , -6.9850674 ,
+               9.546438  ], dtype=float32),
+ DeviceArray(7.447078, dtype=float32, weak_type=True))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will train our model, again using gradient descent. This time we will not batch, since our training data only has 25 points. Can you see what the learning rate is? Why is it so different from the last chapter when we used the whole dataset?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## training</span>
+<span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="n">test_loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6d76fbe3bbda81ffb89f78021fa24c52bf0f029ae2c8efa43d1dcedeb5e3e69b.png" src="../../_images/6d76fbe3bbda81ffb89f78021fa24c52bf0f029ae2c8efa43d1dcedeb5e3e69b.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;correlation = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;loss = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Training Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/84b6d014ea04cd8e065cce202f6127df00c587940d8757b32a1ce2fbc6e0a87b.png" src="../../_images/84b6d014ea04cd8e065cce202f6127df00c587940d8757b32a1ce2fbc6e0a87b.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat</span> <span class="o">=</span> <span class="n">test_x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">test_y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">test_y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">test_y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">test_y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span>   <span class="sa">f</span><span class="s2">&quot;correlation = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span><span class="w"> </span><span class="n">yhat</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span>   <span class="sa">f</span><span class="s2">&quot;loss = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">test_y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">yhat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Testing Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/2f9ff914846e8db63cccd8264143190ff55298a05d94dcf9e83a83f185005ba2.png" src="../../_images/2f9ff914846e8db63cccd8264143190ff55298a05d94dcf9e83a83f185005ba2.png" />
+</div>
+</div>
+<p>We’ve plotted above the loss on our training data and testing data. The loss on training goes down after each step, as we would expect for gradient descent. However, the testing loss goes down and then starts to go back up. This is called <strong>overfitting</strong>. This is one of the key challenges in ML and we’ll often be discussing it.</p>
+<p>Overfitting is a result of training for too many steps or with too many parameters, resulting in our model learning the <strong>noise</strong> in the training data. The noise is specific for the training data and when computing loss on the test data there is poor performance.</p>
+<p>To understand this, let’s first define noise. Assume that there is a “perfect” function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that can compute labels from features. Our model is an estimate <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> of that function. Even <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> will not reproduce the data exactly because our features do not capture everything that goes into solubility and/or there is error in the solubility measurements themselves. Mathematically,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-32eaa3f4-c5b6-430e-b53c-bab50d44702c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-32eaa3f4-c5b6-430e-b53c-bab50d44702c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    y = f(\vec{x}) + \epsilon
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random number with mean 0 and unknown standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(\epsilon\)</span> is the noise. When fitting our function, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>, the noise is fixed because our labels <span class="math notranslate nohighlight">\(y\)</span> are fixed. That means we can accidentally learn to approximate the sum <span class="math notranslate nohighlight">\((f(\vec{x}) + {\epsilon_i})\)</span> instead of only capturing <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. The noise is random and uncorrelated with solubility. When we move to our testing dataset, this noise changes because we have new data and our model’s effort to reproduce noise is useless because the new data has new noise. This leads to worse performance.</p>
+<p>Overfitting arises when three things happen:</p>
+<ul class="simple">
+<li><p>you have noise,</p></li>
+<li><p>you have extra features or some part of your features are not correlated with the labels,</p></li>
+<li><p>your training has converged (your model fit is at the global minimum). This last one is what we saw above. Our model wasn’t overfit after about 100 steps (the training and testing loss were both decreasing), but then they starting going in opposite directions.</p></li>
+</ul>
+<p>Let’s see how these things interplay to lead to overfitting in an example where we can exactly control the features and noise.</p>
+<section id="overfitting-with-synthetic-data">
+<h3>Overfitting with Synthetic Data<a class="headerlink" href="#overfitting-with-synthetic-data" title="Permalink to this heading">#</a></h3>
+<p>We’ll explore overfitting in a synthetic example. Our real function we’re trying to learn will be:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d065961b-6be2-4a30-a1d7-d10067f4fc64">
+<span class="eqno">(7)<a class="headerlink" href="#equation-d065961b-6be2-4a30-a1d7-d10067f4fc64" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ f(x) = x^3 - x^2 + x - 1
+\end{equation}\]</div>
+<p>which we can rewrite as a linear model:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b0c9ff4f-b36a-4e62-a85c-32279e2cbd08">
+<span class="eqno">(8)<a class="headerlink" href="#equation-b0c9ff4f-b36a-4e62-a85c-32279e2cbd08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+  f(\vec{x}) = \vec{w}\cdot\vec{x} = [1, -1, 1, -1]\cdot[x^3, x^2, x, 1]
+\end{equation}\]</div>
+<p>where our features are <span class="math notranslate nohighlight">\([x^3, x^2, x, 1]\)</span>. To do our split, we’ll take the positive points as training data and the negative as testing data. To avoid the issue of convergence, we will use least squares to fit these models instead of gradient descent.</p>
+<p>Let’s establish a benchmark. How well can a model do without noise? We’ll use 10 training data points and 10 testing data points. We’ll put our testing data in the center of the polynomial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate data from polynomial</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">syn_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="c1"># create feature matrix</span>
+<span class="n">syn_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">syn_x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">syn_x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">syn_x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">syn_x</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">syn_labels</span> <span class="o">=</span> <span class="n">syn_x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">syn_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">syn_x</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split data into train/test</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="n">test_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="n">syn_labels</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">syn_labels</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+
+<span class="c1"># fit using numpy least squares method.</span>
+<span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+
+<span class="c1"># plotting code</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">train_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">syn_features</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">syn_labels</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Training Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">train_x</span><span class="p">,</span><span class="w"> </span><span class="n">train_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Testing Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">test_x</span><span class="p">,</span><span class="w"> </span><span class="n">test_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;No Noise, Perfect Features&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/cbcd59dd6fe84474449cce43fa6db03f4364c322f4b5fd365c850815b24dfe2b.png" src="../../_images/cbcd59dd6fe84474449cce43fa6db03f4364c322f4b5fd365c850815b24dfe2b.png" />
+</div>
+</div>
+<p>There is no overfitting and the regression is quite accurate without noise. Now we’ll add noise to both the training labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_y</span> <span class="o">=</span> <span class="n">train_y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">train_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">syn_features</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">syn_labels</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Training Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">train_x</span><span class="p">,</span><span class="w"> </span><span class="n">train_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Testing Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">test_x</span><span class="p">,</span><span class="w"> </span><span class="n">test_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noise, Perfect Features&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/5749092d90358331cc354db78c372265d978d7fdf5978e422a44d20ff143b472.png" src="../../_images/5749092d90358331cc354db78c372265d978d7fdf5978e422a44d20ff143b472.png" />
+</div>
+</div>
+<p>Adding noise reduces the accuracy on the training data. The testing labels have no noise and the model is not overfit, so the accuracy is good for the testing loss.</p>
+<p>Now we’ll try adding redundant features. Our new features will be <span class="math notranslate nohighlight">\([x^6, x^5, x^4, x^3, x^2, x, 1]\)</span>. Still less than our data point number but not all features are necessary to fit the labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">syn_x</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">syn_labels</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">train_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">syn_features</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">syn_labels</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Training Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">train_x</span><span class="p">,</span><span class="w"> </span><span class="n">train_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Testing Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">test_x</span><span class="p">,</span><span class="w"> </span><span class="n">test_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noise, Extra Features&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/fd3f33b142e3fa4e7ccbe239a197f184f519f88ab9f37bce3fbf5ae6e9707818.png" src="../../_images/fd3f33b142e3fa4e7ccbe239a197f184f519f88ab9f37bce3fbf5ae6e9707818.png" />
+</div>
+</div>
+<p>This is an overfit model. The training loss went down (note the noise was the same in the previous two examples), but at the expense of a large increase in testing loss. This wasn’t possible in the previous example because over-fitting to noise wasn’t feasible when each feature was necessary to capture the correlation with the labels.</p>
+<p>Let’s see an example where the feature number is the same but they aren’t perfectly correlated with labels, meaning we cannot match the labels even if there was no noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">syn_x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">syn_x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">syn_x</span><span class="o">**</span><span class="mi">2</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">syn_x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">syn_x</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">train_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">syn_features</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fit Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">,</span> <span class="n">syn_labels</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground Truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Training Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">train_x</span><span class="p">,</span><span class="w"> </span><span class="n">train_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Testing Loss </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">test_x</span><span class="p">,</span><span class="w"> </span><span class="n">test_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noise, Imperfectly Correlated Features&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/0d9aefd5f161b2347098293d2330522faaa14f95cf649032566f73bd7c2bd50b.png" src="../../_images/0d9aefd5f161b2347098293d2330522faaa14f95cf649032566f73bd7c2bd50b.png" />
+</div>
+</div>
+<p>It’s arguable if this is overfitting. Yes, the testing loss is high but it could be argued it’s more to do with the poor feature choice. In any case, even though our parameter number is less than the clear cut case above, there is still left over variance in our features which can be devoted to fitting noise.</p>
+<p>Would there overfitting with imperfectly correlated features if we had no noise? Justify your answer</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Probably not - although features might diverge or become zero where the test data is located, we cannot be overfitting to noise if there is no noise.</p>
+</div>
+</section>
+<section id="overfitting-conclusion">
+<h3>Overfitting Conclusion<a class="headerlink" href="#overfitting-conclusion" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Overfitting is inevitable in real data because we cannot avoid noise and rarely have the perfect features.</p></li>
+<li><p>Overfitting can be assessed by splitting our data into a train and test split, which mimics how we would use the model (i.e., on unseen data).</p></li>
+<li><p>Overfitting is especially affected by having too many features or features that don’t correlate well with the labels.</p></li>
+<li><p>We can identify overfitting from a loss curve which shows the testing loss rising while training loss is decreasing.</p></li>
+</ul>
+</section>
+</section>
+<section id="exploring-effect-of-feature-number">
+<h2>Exploring Effect of Feature Number<a class="headerlink" href="#exploring-effect-of-feature-number" title="Permalink to this heading">#</a></h2>
+<p>We’ve seen that overfitting is sensitive to the number and choice of features. Feature selection is a critical decision in supervised learning. We’ll return to the solubility dataset to discuss this. It has 17 molecular descriptors, but these are just a small fraction of the possible molecular descriptors that can be used. For example, there is a software called <a class="reference external" href="https://chm.kode-solutions.net/products_dragon.php">Dragon</a> that can compute over 5,000 descriptors. You can also create linear combinations of descriptors and pass them through functions. Then there is the possibility of experimental data, data from molecular simulations, and from quantum calculations. There is essentially an unlimited number of possible molecular descriptors. We’ll start this chapter by exploring what effect of number of features (dimension of features) has on the data.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><strong>Descriptor</strong> is chemistry and materials specific word for feature. It pre-dates the word features and comes from the field of “quantitative-structure activity relationship” (QSAR), which has a long history in drug design and molecular design.</p>
+</aside>
+<p>We are now working with a real dataset, which means there is randomness from which features we choose, which training data we choose, and randomness in the labels themselves. In the results below, they are averaged over possible features and possible training data splits to deal with this. Thus the code is complex. You can see it on <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/ml/regression.ipynb">the Github repository</a>, but I’ve omitted it here for simplicity.</p>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">small_feature_number</span></code> shows the effect of choosing different features on both the loss on training data and the loss on test data. There are three regimes in this plot. At 1-3 features, we are <strong>underfit</strong> meaning both the training and testing losses could be improved with more features or more training. In this case, it is because there are too few features. Until about 10 features, we see that adding new features slightly improves training data but doesn’t help test data meaning we’re probably slightly overfitting. Then at 10, there is a large increase as we move to the overfit regime. Finally at about 30 features, our model is no longer converging and training loss rises because it is too difficult to train the increasingly complex model. “Difficult” here is a relative term; you can easily train for more time on this simple model but this is meant as an example.</p>
+<p><code class="xref std std-numref docutils literal notranslate"><span class="pre">large_feature_number</span></code> shows the same analysis but for 250 train and 250 test data. The accuracy on test data is better (about 1.9 vs 2.5). There is not much overfitting visible here. The model is clearly underfit until about 10 features and then each additional feature has little effect. Past 20 features, we again see an underfit because the model is not trained well. This could fixed by adding more training steps.</p>
+<hr class="docutils" />
+<p>Increasing feature numbers is useful up to a certain point. Although some methods are unstable when the number of features is exactly the same as the number of data points, there is reason overfitting begins at or near feature numbers equal to the number of data points. Overfitting can disappear at large feature numbers because of model size and complexity. Here there is also a risk of underfitting.</p>
+<p>The risk of overfitting is lower as your dataset size increases. The reason for this is that the noise becomes smaller than the effect of labels on training as you increase data points. Recall from the Central Limit Theorem that reducing noise by a factor of 10 requires 100 times more data, so this is not as efficient as choosing better features. Thinking about these trade-offs, to double your feature number you should quadruple the number of data points to reduce the risk of overfitting. Thus there is a strong relationship between how complex your model can be, the achievable accuracy, the data required, and the noise in labels.</p>
+</section>
+<section id="bias-variance-decomposition">
+<h2>Bias Variance Decomposition<a class="headerlink" href="#bias-variance-decomposition" title="Permalink to this heading">#</a></h2>
+<p>We will now try to be more systematic about this difference in model performance between training and testing data. Consider an unseen label <span class="math notranslate nohighlight">\(y\)</span> and our model <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>. Our error on the unseen label is:</p>
+<div class="math notranslate nohighlight" id="equation-exp-error">
+<span class="eqno">(9)<a class="headerlink" href="#equation-exp-error" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\]</div>
+<p>What is the expectation over? For now, let’s just assume the only source of randomness is in the noise from the label (recall <span class="math notranslate nohighlight">\(y = f(\vec{x}) + \epsilon\)</span>). Then our expression becomes:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ec1c2ddc-d422-4fe4-b5b8-a92a48ede16b">
+<span class="eqno">(10)<a class="headerlink" href="#equation-ec1c2ddc-d422-4fe4-b5b8-a92a48ede16b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[y^2\right] + E\left[\hat{f}(\vec{x})^2\right] - 2 E\left[y\hat{f}(\vec{x})\right]
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-bb066822-df92-4049-86c4-e336cd090bc6">
+<span class="eqno">(11)<a class="headerlink" href="#equation-bb066822-df92-4049-86c4-e336cd090bc6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[\left(f(\vec{x}) - \epsilon\right)^2\right] + \hat{f}(\vec{x})^2 - 2 E\left[\left(f(\vec{x}) - \epsilon\right)\right]\hat{f}(\vec{x})
+\end{equation}\]</div>
+<p>I have dropped the expectations over deterministic expression <span class="math notranslate nohighlight">\(\hat{f}\)</span>. You can continue this, again dropping any <span class="math notranslate nohighlight">\(E[f(\vec{x})]\)</span> terms and using the definition of <span class="math notranslate nohighlight">\(\epsilon\)</span>, a zero mean normal distribution with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. You will arrive at:</p>
+<div class="math notranslate nohighlight" id="equation-exp-error-nod">
+<span class="eqno">(12)<a class="headerlink" href="#equation-exp-error-nod" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = \left(f(\vec{x}) - \hat{f}(\vec{x})\right)^2 + \sigma^2\]</div>
+<p>This expression means the best we can do on an unseen label is the noise of the label. This is very reasonable, and probably matches your intuition. The best you can do is match exactly the noise in the label when you have a perfect agreement between <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>  and <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span></p>
+<p><em>However, this analysis did not account for the fact our choice of training data is random</em>. Things become more complex when we consider that our choice of training data is random. Return to Equation <a class="reference internal" href="#equation-exp-error">(9)</a> and now replace <span class="math notranslate nohighlight">\(\hat{f}\left(\vec{x}\right)\)</span> with <span class="math notranslate nohighlight">\(\hat{f}\left(\vec{x}; \mathbf{D}\right)\)</span> where <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is a random variable indicating the random data sample. You can find a complete derivation on <a class="reference external" href="https://en.wikipedia.org/wiki/Bias-variance_tradeoff">Wikipedia</a>. The key change is that  <span class="math notranslate nohighlight">\(\left(f(\vec{x}) - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right)^2\)</span> is now a random variable. Equation <a class="reference internal" href="#equation-exp-error-nod">(12)</a> becomes:</p>
+<div class="math notranslate nohighlight" id="equation-bv">
+<span class="eqno">(13)<a class="headerlink" href="#equation-bv" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = E\left[f(\vec{x}) - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right]^2 + 
+    E\left[\left(E\left[\hat{f}\left(\vec{x}; \mathbf{D}\right)\right] - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right)^2\right] + \sigma^2\]</div>
+<p>This expression is the most important equation for understanding ML and deep learning training. The first term in this expression is called <strong>bias</strong> and captures how far away our model is from the correct function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. This is the expected (average) loss we get given a random dataset evaluated on a new unseen data point. You may think this the most important quantity – expected difference between the true function and our model on a new data point. However, bias does not determine the expected error on an unseen data point alone, there other terms.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In Equation<a class="reference internal" href="#equation-bv">(13)</a> <span class="math notranslate nohighlight">\(\vec{x}\)</span> is a fixed quantity, unlike what you may be used to in probability. The actual random variables are <span class="math notranslate nohighlight">\(\epsilon\)</span> (noise in label) and <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> (our chosen training data).</p>
+</aside>
+<p>The second term is surprising. It is called the <strong>variance</strong> and captures how much change at the unseen data point <span class="math notranslate nohighlight">\((\vec{x},y)\)</span> there is due to changes in the random variable <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>. What is surprising is that the expected loss depends on the variance of the learned model. Think carefully about this. A model which is highly sensitive to which training data is chosen has a high expected error on test data. Furthermore, remember that this term <strong>variance</strong> is different than variance in a feature. It captures how the model value changes at a particular <span class="math notranslate nohighlight">\(\vec{x}\)</span> as a function of changing the training data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are three sources of randomness in the expectation: the choice of test data, the label noise, and the choice of training data. However, once you pick the training data, the test data is fixed so we do not indicate or worry about this. A quantity like <span class="math notranslate nohighlight">\(E[\hat{f}(\vec{x})]\)</span> means splitting your data every possible way, fitting the models, then computing the value <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> on the unseen test <span class="math notranslate nohighlight">\(\vec{x}\)</span>. Then you take the average over the unseen test values. You can also skip the last step and leave <span class="math notranslate nohighlight">\(E[\hat{f}(\vec{x})]\)</span> as a function of <span class="math notranslate nohighlight">\(\vec{x}\)</span>, which is what is plotted in <code class="xref std std-numref docutils literal notranslate"><span class="pre">low_var</span></code>  and <code class="xref std std-numref docutils literal notranslate"><span class="pre">high_var</span></code>.</p>
+</div>
+<p>These three terms: noise, bias, and variance set the minimum value for test error. Noise is set by your data and not controllable. However, bias and variance are controllable. What does a high bias, low variance model look like? A 1D linear model is a good example. See <code class="xref std std-numref docutils literal notranslate"><span class="pre">low_var</span></code>. It has one parameter so a sample of data points gives a consistent estimate. However, a 1D model cannot capture the true <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> so it has a large average error (bias) at a given point. What does a low bias, high variance model look like? An overfit model like the one shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">high_var</span></code>. It has extreme outliers on test data, but on average it actually has a low bias.</p>
+<p><strong>The Tradeoff</strong></p>
+<p>The way to change bias and variance is through <strong>model complexity</strong>, which is feature number in our linear models. Increasing model complexity reduces bias and increases variance. There is an optimum for our polynomial example, shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">bv</span></code>. Indeed this is true of most ML models, although it can be difficult to cleanly increase model complexity and keep training converged. However, this is <a class="reference external" href="https://www.bradyneal.com/bias-variance-tradeoff-textbooks-update">not typically true in deep learning with neural networks</a><span id="id3">[]</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The bias–variance tradeoff for model complexity is based on experience. The decomposition above does not prove a tradeoff, just that you can split these two terms. Intentionally underfitting, adding noise, and exchanging one feature for another are all ways to affect bias and variance without adjusting complexity. Also, sometimes you can just improve both with better models.</p>
+</div>
+<p>The bias–variance tradeoff is powerful for explaining the intuition we’ve learned from examples above. Large datasets reduce model variance, explaining why it is possible to increase model complexity to improve model accuracy only with larger datasets. Overfitting reduces bias at the cost of high variance. Not training long enough increases bias, but reduces variance as well since you can only move so far from your starting parameters.</p>
+</section>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this heading">#</a></h2>
+<p>Adding features is a challenging way to exchange model bias and variance because it comes in discrete steps and some features are just better than others. A different way is to use a complex model (all features) but reduce variance through <strong>regularization</strong>. Regularization is the addition of an extra term to your loss function that captures some unwanted property about your model that you want to minimize.</p>
+<section id="l2-regularization">
+<h3>L2 Regularization<a class="headerlink" href="#l2-regularization" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>You can add the bias <span class="math notranslate nohighlight">\(b\)</span> to the regularization term, but this should
+only be done if you have some prior belief that the bias should be 0 – like if it represents some physical quantity that should be minimized. Otherwise minimizing <span class="math notranslate nohighlight">\(b\)</span> has no effect on overfitting and so is not part of regularization.</p>
+</aside>
+<p>Our first example is the magnitude of fit coefficients. The magnitude of the coefficients is <span class="math notranslate nohighlight">\(\sum_k w_k^2\)</span> where <span class="math notranslate nohighlight">\(w_k\)</span> the index of a single coefficient. We add this to our loss function:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-714b4479-1f38-4ab6-a74f-5cac407297f3">
+<span class="eqno">(14)<a class="headerlink" href="#equation-714b4479-1f38-4ab6-a74f-5cac407297f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k w_k^2
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is our strength of regularization. By changing <span class="math notranslate nohighlight">\(\lambda\)</span>, we control how large the magnitude of our parameters are and that directly reduces the variance. You can see the result in <code class="xref std std-numref docutils literal notranslate"><span class="pre">l2</span></code> for our polynomial example. Increasing the strength of regularization decreases variance at the cost of increasing model bias. Remember in deep learning there isn’t as much of a tradeoff and often you just get a reduction in variance with no degradation in bias. Adding L2 regularization with a linear model has a specific name: <strong>Ridge Regression</strong>.</p>
+<p>Why does this work? Look at the gradient of a particular weight of our new loss function:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-239f2a66-09e8-4e19-8b19-619eb40b7688">
+<span class="eqno">(15)<a class="headerlink" href="#equation-239f2a66-09e8-4e19-8b19-619eb40b7688" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \frac{\partial L}{\partial w_4} = \frac{2}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]\frac{\partial \hat{f}(\vec{x}_i, \vec{w}, b)}{\partial w_4} + 2\lambda w_4
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_4\)</span> is one of our weights. The first term on the right-hand side accounts for how <span class="math notranslate nohighlight">\(w_4\)</span> affects our accuracy, like usual. The second term is from the regularization. You can see that the gradient is just the value of weight times a constant. Let’s contract the first term into a variable called <span class="math notranslate nohighlight">\(g_{w_4}\)</span> and look at how this new gradient affects our updates to <span class="math notranslate nohighlight">\(w_4\)</span>. Our gradient descent update of <span class="math notranslate nohighlight">\(w_4\)</span> becomes:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-27f8a65f-294e-450f-a642-7375532189b0">
+<span class="eqno">(16)<a class="headerlink" href="#equation-27f8a65f-294e-450f-a642-7375532189b0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    w_4' = w_4 -\eta g_{w_4} - 2\eta\lambda w_4
+\end{equation}\]</div>
+<p>So our regularization pushes <span class="math notranslate nohighlight">\(w_4'\)</span> to always have a lower magnitude. If <span class="math notranslate nohighlight">\(w_4' = 2.5\)</span>, the update will include a term of <span class="math notranslate nohighlight">\(-2\eta \lambda 2.5\)</span>, pushing our weight value closer to zero. This means our weights always are pushed towards zero. Of course the term coming from model error (<span class="math notranslate nohighlight">\(g_{w_4}\)</span>) also has an effect so that we end up at a balance of lower magnitude weights and model error. We control that balance through the <span class="math notranslate nohighlight">\(\lambda\)</span> term.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The terms L1 and L2 come from the definition of norms. They indicate the coefficient
+used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1/p}\)</span>, where <span class="math notranslate nohighlight">\(p =1\)</span> for L1 and <span class="math notranslate nohighlight">\(p = 2\)</span> for L2. Others exist, like <span class="math notranslate nohighlight">\(p = 0\)</span> which counts dimension and <span class="math notranslate nohighlight">\(p = \infty\)</span> which takes the maximum element. The “L” comes from the word Lebesgue integral, via a confusing path.</p>
+</aside>
+</section>
+<section id="l1-regularization">
+<h3>L1 Regularization<a class="headerlink" href="#l1-regularization" title="Permalink to this heading">#</a></h3>
+<p>L1 regularization changes our loss to be the following:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-84e222e9-f44e-464b-8651-7d6746374fe7">
+<span class="eqno">(17)<a class="headerlink" href="#equation-84e222e9-f44e-464b-8651-7d6746374fe7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k \left|w_k\right|
+\end{equation}\]</div>
+<p>It may appear at first that this is identical to L2. In fact, the L1 regularization has a powerful benefit: it induces sparsity. L2 just causes regression coefficients to be on average lower, but L1 forces some coefficients to be 0. This gives us a kind of “automatic” feature selection. This is called <strong>Lasso Regression</strong> when you combine L1 regularization with linear regression.</p>
+<p>As far as choosing which regularization to use, I’ll <a class="reference external" href="https://stats.stackexchange.com/a/184022">quote Frank Harrell</a>, a biostatistics professor at Vanderbilt:</p>
+<blockquote>
+<div><p>Generally speaking if you want optimum prediction use L2. If you want parsimony at some sacrifice of predictive discrimination use L1. But note that the parsimony can be illusory, e.g., repeating the lasso process using the bootstrap [introduced below] will often reveal significant instability in the list of features “selected” especially when predictors are correlated with each other.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="strategies-to-assess-models">
+<h2>Strategies to Assess Models<a class="headerlink" href="#strategies-to-assess-models" title="Permalink to this heading">#</a></h2>
+<p>We will now discuss more ways to assess model performance. These are more robust approaches to assess loss on testing data.</p>
+<section id="k-fold-cross-validation">
+<h3>k-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this heading">#</a></h3>
+<p>The bias–variance decomposition shows that our testing error is sensitive to what training data has been chosen. The expected mean test error <span class="math notranslate nohighlight">\(E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\)</span> depends on the label noise <strong>and</strong> the way we split our data into training and testing data. Thus far, we’ve only gotten a single sample from this expectation by splitting. One way to better estimate the value on unseen data is to repeat the process of splitting data into training and testing multiple times. This is called <strong>k-fold</strong> cross-validation, where <span class="math notranslate nohighlight">\(k\)</span> is the number of times you repeat the process. k-fold cross-validation is useful because certain high-variance model choices can give different testing errors depending on the train/test split. k-fold also provides multiple samples so that you can estimate the <strong>uncertainty</strong> in testing error. As all things to do with model variance, the smaller the dataset the more important this is. Typically with very large datasets k-fold cross-validation is not done because label noise dominates and testing a model k times can be time-consuming.</p>
+<p>k-fold cross-validation has a specific process for splitting testing and training data. What we did previously was split into a 50/50 split of training and testing. In k-fold, we split our data into k segments. Then we train on k-1 segments and test on the last segment. You can do this k-ways. For example, with K = 3 you would split your data into A, B, C. The first train/test split would be A, B for training and C for testing. Then B, C for training and A for testing. The last would be A, C for training and B for testing. Following this procedure means that your percentage split will be 90/10 for <span class="math notranslate nohighlight">\(k = 10\)</span> and 50/50 for <span class="math notranslate nohighlight">\(k = 2\)</span>. This has a disadvantage that the number of estimates for testing error depends on size of train/test split. For example, you cannot get 10 estimates for an 80/20 split. An 80/20 split means exactly 5-fold cross-validation. We’ll see other methods that relax this later on. The 80/20 is a typical rule that balances having enough data for good training and enough to robustly assess how well your model performs.</p>
+<p>Let’s now use k-fold cross-validation in two examples: our full dataset and a smaller 25 data point sample. Rather than using gradient descent here, we’ll just use the pseudo-inverse to keep our code simple. The pseudo-inverse is the least-squares solution.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">soldata</span><span class="p">)</span>
+<span class="c1"># make indices for the k segments</span>
+<span class="n">splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">))</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="c1"># slice out segments</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+    <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:],</span> <span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">:]])</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># compute coefficients</span>
+    <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># compute intercept (b)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+    <span class="c1"># compute test erropr</span>
+    <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Split Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">-fold cross-validation of soldata&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>The final answer in this case is the average of these values: <span class="math notranslate nohighlight">\(\pm\)</span>. The advantage of the k-fold is that we can report standard deviation like this.</p>
+<p>Now what effect does k have on the test error? Let’s see how our choice of k matters</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">soldata</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">error_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">))</span>
+    <span class="n">k_error</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="c1"># slice out segments</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+        <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:],</span> <span class="n">soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">:]])</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># compute coefficients</span>
+        <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="c1"># compute intercept (b)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+        <span class="c1"># compute test error</span>
+        <span class="n">k_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_error</span><span class="p">))</span>
+    <span class="n">error_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_error</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">error</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">error_std</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k-fold cross-validation of soldata&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>As you can see, there is not much sensitivity to k. This is good, because k is mostly arbitrary. Larger k means more samples, but each test data is smaller so that these two effects should balance out.</p>
+<p>Large datasets are not that sensitive because the training and testing splits are large. Let us examine what happens with <span class="math notranslate nohighlight">\(N = 25\)</span>, a realistic case in chemistry data. We’ll just pick 25 data points at the beginning and not change that choice, mocking what would happen in a real example.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_soldata</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">small_soldata</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">error_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="n">k</span><span class="p">))</span>
+    <span class="n">k_error</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="c1"># slice out segments</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">small_soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+        <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">small_soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:],</span> <span class="n">small_soldata</span><span class="p">[</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">:]])</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># compute coefficients</span>
+        <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="c1"># compute intercept (b)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+        <span class="c1"># compute test erropr</span>
+        <span class="n">k_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_error</span><span class="p">))</span>
+    <span class="n">error_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_error</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">error</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">error_std</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k-fold cross-validation of soldata subsample&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Our results are a little sensitive to the choice of <span class="math notranslate nohighlight">\(k\)</span>. Now why might test error decrease? Remember that a larger <span class="math notranslate nohighlight">\(k\)</span> means <em>more</em> data points for training. This did not matter above when we had 10,000 data points. Now it is very importatnt, since we only have 25 data points. Thus larger k means more training data.</p>
+</section>
+<section id="leave-one-out-cv">
+<h3>Leave-one-out CV<a class="headerlink" href="#leave-one-out-cv" title="Permalink to this heading">#</a></h3>
+<p>Larger k means more training data, so what is the largest it can be? Remember that k is the number segments in your data. So <span class="math notranslate nohighlight">\(k = N\)</span> is the max, where each data point is a segement. This is called <strong>leave-one-out cross-validation</strong> (LOOCV). It creates <span class="math notranslate nohighlight">\(N\)</span> different models, one for each data point left out, and so is only used for small datasets. Thus the advantage of LOOCV is it maximizes training data, but maximizes the number of times the model needs to be trained.</p>
+</section>
+</section>
+<section id="computing-other-measures">
+<h2>Computing Other Measures<a class="headerlink" href="#computing-other-measures" title="Permalink to this heading">#</a></h2>
+<p>Using LOOCV and k-fold cross-validation, we’re able to predict test error. This “test error” is specifically an expected error on an unseen data point. Now how do we actually treat a new data point? What will we report as the certainty in a new point? The test error? We’ll call this point the <strong>prediction point</strong> and we’ll try to estimate the quantiles of this point. Quantiles are the building blocks for confidence intervals. Recall that confidence intervals allow us to report our model prediction as <span class="math notranslate nohighlight">\(4.3 \pm 0.2\)</span>, for example.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Classically bootstrap resampling and <strong>jacknife</strong>, its predecessor, are used for estimating variance in model parameters (i.e., model variance). However, they are more commonly used in ML for predicting confidence intervals and/or test error for new points (also called generalization error).</p>
+</aside>
+<section id="bootstrap-resampling">
+<h3>Bootstrap Resampling<a class="headerlink" href="#bootstrap-resampling" title="Permalink to this heading">#</a></h3>
+<p>To estimate quantiles, we need to have a series of observations of predictions from the prediction point <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}')\)</span>, where <span class="math notranslate nohighlight">\(\vec{x}'\)</span> is the prediction point. For example, we could do 5-fold cross-validation and have 5 estimates of <span class="math notranslate nohighlight">\(\hat{f}_k(\vec{x}')\)</span> and could estimate the quantiles using a t-statistic. Instead, we’ll use a method called <strong>bootstrap resampling</strong> which removes the restriction that we can only use <span class="math notranslate nohighlight">\(1 - 1 / k\)</span> of the training data. Bootstrap resampling is a general process for estimating uncertainty for empirical statistics without assuming a probability distribution (i.e., non-parametric). In bootstrap resampling, we create as many as desired new training datasets that are the same size as the original by sampling <strong>with replacement</strong> from the original dataset. That means our new dataset has fewer members than the original and makes up the difference with duplicates. Let’s see an example. If your training dataset originally has data A, B, C, D, E, our bootstrap resampled training data is:</p>
+<ol class="arabic simple">
+<li><p>A, B, B, D, E</p></li>
+<li><p>B, C, C, C, E</p></li>
+<li><p>A, B, D, E, E</p></li>
+<li><p>A, B, C, D, E</p></li>
+<li><p>A, A, C, C, D</p></li>
+</ol>
+<p>and so forth. The “with replacement” means that we allow repeats. This gives some variation to our training data. It also means we can generate <span class="math notranslate nohighlight">\(2^N\)</span> new datasets, which is practically as many as we want. Let’s see now how we could use this to quantile the estimate for a prediction on a test point. We’ll set <span class="math notranslate nohighlight">\(N = 1000\)</span> and do bootstrap resampling for 100 iterations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create training data and 1 test point</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="c1"># this line gets the data for our example</span>
+<span class="c1"># it is not the bootstrap resampling</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">small_soldata</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">N</span><span class="p">]</span>
+<span class="n">predict_point</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
+    <span class="c1"># choose with replacement indices to make new dataset</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">small_soldata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># compute coefficients</span>
+    <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># compute intercept (b)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+    <span class="c1"># compute test prediction</span>
+    <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">predict_point</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="c1"># compute quantiles (lower, median, upper)</span>
+<span class="n">qint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">])</span>
+<span class="c1"># compute avg distance from median to report +/-</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;prediction = </span><span class="si">{</span><span class="n">qint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="p">(</span><span class="n">qint</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qint</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, label = </span><span class="si">{</span><span class="n">predict_point</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting prediction has confidence intervals, thanks to the bootstrap resampling. This approach has a few disadvantages though. The first is that we need to produce and keep 100 models, one for each bootstrap resample. Of course you could choose fewer, but you need to have enough for good statistics.</p>
+<p>Another issue is that this process does not give a reportable test error. We could further split our data again and do k-fold cross-validation on this approach to get test error. However, this is a bit overly complex and then we’ll be at a similar problem that we’ll have k sets of 100 models and it’s not obvious how to combine them. These prediction intervals also under-estimate the model bias, because it has no estimate of the test error. It only accounts for variation due to training data. Using the language above, it only accounts for model variance but not model bias.</p>
+<p>Bootstrap resampling is still an excellent technique that is used often to estimate uncertainties. However, it is not a great choice for estimating model error on unseen datapoints.</p>
+</section>
+<section id="jacknife">
+<h3>Jacknife+<a class="headerlink" href="#jacknife" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>There is a method called Jacknife, which does not compute multiple predictions. It computes the residuals as mentioned above, but it trains one final model on all data. Since it requires you to compute all <span class="math notranslate nohighlight">\(N\)</span> models to get the residuals, it is preferred to just use Jacknife+ which is more robust.</p>
+</aside>
+<p>An alternative approach that accounts for model variance like the bootstrap method and model bias like the k-fold cross-validation method is called <strong>Jacknife+</strong> <span id="id4">[]</span>.  Jacknife+ carries strong guarantees about accuracy of the confidence intervals generated, regardless of the underlying data or model. The change now is that we use LOOCV to create an ensemble of models (although you can subsample down if you do not want N of them) and also compute the models’ test error on the withheld test data. The final quantile estimates incorporate the variance from the variety of models (model variance) and also each models’ individual test error (model bias).
+Specifically, we compute:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dd6ce936-9614-45ba-bff4-6d89ce47b5b2">
+<span class="eqno">(18)<a class="headerlink" href="#equation-dd6ce936-9614-45ba-bff4-6d89ce47b5b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+R_i = \left|y_i - \hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i )\right|
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{X} \setminus \vec{x}_i\)</span> is the dataset to train the <span class="math notranslate nohighlight">\(i\)</span>th model and is the dataset excluding point <span class="math notranslate nohighlight">\((\vec{x}_i, y_i)\)</span>, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i ) \)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th model evaluated on point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>, and <span class="math notranslate nohighlight">\(R_i\)</span> is the residual of model <span class="math notranslate nohighlight">\(i\)</span> computed by taking the difference between the label and prediction on point <span class="math notranslate nohighlight">\(i\)</span>. <span class="math notranslate nohighlight">\(R_i\)</span> encodes how good the <span class="math notranslate nohighlight">\(i\)</span>th model is. We then combine it with the predictions on our new test point <span class="math notranslate nohighlight">\((\vec{x}', y')\)</span> to make our set for quantiling</p>
+<div class="amsmath math notranslate nohighlight" id="equation-24320ce4-fac0-4994-9ef0-a6b49e652b99">
+<span class="eqno">(19)<a class="headerlink" href="#equation-24320ce4-fac0-4994-9ef0-a6b49e652b99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+q_1 = \left\{ \hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) - R_i\right\}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-54b3e119-de47-46c6-a7b6-001ace6bd020">
+<span class="eqno">(20)<a class="headerlink" href="#equation-54b3e119-de47-46c6-a7b6-001ace6bd020" title="Permalink to this equation">#</a></span>\[\begin{equation}
+q_2 = \left\{\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) + R_i\right\}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q\)</span> means quantile. The first quantile <span class="math notranslate nohighlight">\(q_1\)</span>, with <span class="math notranslate nohighlight">\( - R_i\)</span>, is how low below the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. The second set, with <span class="math notranslate nohighlight">\( + R_i\)</span>, is how high above the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. To compute our final value, we take the median of <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i )\)</span> and report the lower end of the interval as the 5% quantile of <span class="math notranslate nohighlight">\(q_1\)</span> and the top as the 95% quantile of <span class="math notranslate nohighlight">\(q_2\)</span>. You can see that this method combines the ensemble of prediction models given by bootstrap resampling with the error estimates from LOOCV. Let’s see an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">residuals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="c1"># make train excluding test point</span>
+    <span class="c1"># we just make a set and remove one element from it</span>
+    <span class="c1"># and then convert back to list</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">small_soldata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># compute coefficients</span>
+    <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># compute intercept (b)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+    <span class="c1"># compute test prediction</span>
+    <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">predict_point</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="c1"># now compute residual on withtheld point</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">small_soldata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">small_soldata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]))</span>
+<span class="c1"># create our set of prediction - R_i and prediction + R_i</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">ri</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">ri</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)]</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="n">ri</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">ri</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)]</span>
+<span class="c1"># compute quantiles (lower, median, upper)</span>
+<span class="n">qlow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">qhigh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">q2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.95</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># compute avg distance from medianto report +/-</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;prediction = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="p">(</span><span class="n">qlow</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qhigh</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, label = </span><span class="si">{</span><span class="n">predict_point</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average test error = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The uncertainty is much higher, which is likely closer to reality. You can see that the residuals add about 1 solubility (model variance) unit and the variability in the data (label noise) adds about 2 solubility units. Jacknife+ should be the preferred method when you have small datasets (1-1000) and can train models quickly enough to be able to compute 1000 of them. You can also replace the exhaustive LOOCV with a random process, where you only do a few iterations (like 25) of LOOCV to avoid computing so many models.</p>
+</section>
+</section>
+<section id="training-data-distribution">
+<h2>Training Data Distribution<a class="headerlink" href="#training-data-distribution" title="Permalink to this heading">#</a></h2>
+<p>We have come a long ways now. We’re able to compute test error, identify overfitting, understand model bias and variance, and predict uncertainty on unseen data points. One of the implied assumptions so far is that our splitting of data into training and testing data mimics what it will be like to predict on an unseen data point. More specifically, we assume that testing data comes from the same probability distribution as our training data. This is true when we’re doing the splitting, but is often violated when we actually get new data to make predictions with.</p>
+<p>There are specific categories for how we have left the training distribution. <strong>Covariate shift</strong> is when the distribution of features changes. Covariate is another word for features. An example might be that the molecular weights of your molecules are larger in your testing data. The relationship between features and labels, <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> remains the same, but the distribution of features is different. <strong>Label shift</strong> means that the distribution of labels has changed. Perhaps our training data was all very soluble molecules but at test time, we’re examining mostly insoluble molecules. Again, our fundamental relationship  <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that we try to estimate with our model still holds.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Applicability Domain</p>
+<p>Applicability domain is a term from cheminformatics describing
+avoiding covariate shift by trying to stay within the training data distribution.</p>
+</aside>
+<p>There are two common reasons unseen data can be out of the training data distribution. The first is that you are extrapolating to new regions of chemical space. For example, you have training data of drug activities. You make a model that can predict activity. What do you do with the model? You obviously find the highest activity drug molecule. However, this molecule is likely to be unusual and not in your training data. If it was in your training data you would probably already be done – namely, you already synthesized and found a molecule with very high activity. Thus you will be pushing your model to regions outside of your training data. Another reason you can be out of training data is that the way you generated training data is different than how the model is used. For example, perhaps you trained on molecules that do not contain fluorine. Then you try your model on molecules that contain fluorine. Your features will be different than what you observed in training. The result of leaving your training data distribution is that your test error increases and the estimates you provide will be too low.</p>
+<section id="leave-one-class-out-cross-validation">
+<h3>Leave One Class Out Cross-Validation<a class="headerlink" href="#leave-one-class-out-cross-validation" title="Permalink to this heading">#</a></h3>
+<p>Thus understanding and assessing training data distribution is an important task. In general, standard models that minimize a loss are poor at predicting extreme values. We will approach this challenge later with specific methods like black-box function optimization. For now, be wary of using your models as tools to find extreme values. The second challenge, that you’re leaving your training data due to how points are generated, can be assessed by computing a more realistic estimate of model error. Namely, your training data is typically gathered (generated) according to a different process than when your model is deployed at test time. This is generalization error, sometimes called <strong>covariate shift</strong>, and we sometimes wish to approximate its effect by simulating different training and testing distributions. This leads us to <strong>leave one class out cross-validation</strong> (LOCOCV).</p>
+<p>In LOCOCV, we must first assign a class to each training data point. This is domain specific. It could be based on the molecule. You could use a clustering method. In our case, our solubility data actually is a combination of five other datasets so our data is already pre-classified based on who measured the solubility. We will now perform a kind of k-fold cross-validation, leaving one class out at a time and assessing model error. We’ll compare this to k-fold cross-validation without classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s see what the groups (classes) are</span>
+<span class="n">unique_classes</span> <span class="o">=</span> <span class="n">soldata</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leave one class out CV</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">soldata</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">error_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unique_classes</span><span class="p">:</span>
+    <span class="c1"># slice out segments</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">soldata</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">soldata</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">]</span>
+    <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># compute coefficients</span>
+    <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># compute intercept (b)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+    <span class="c1"># compute test erropr</span>
+    <span class="n">k_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_error</span><span class="p">))</span>
+    <span class="n">error_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_error</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;test error = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We computed above what the 5-fold cross-validation is for this data, . You can see the LOCOCV test error () is similar, which means our different data sources agree well. So perhaps on new unseen data we can expect similar (not so great) accuracy. There may be other ways to group this data into classes, like based on molecular weight or which atoms are contained in the molecule. It depends on what you believe to be important. Breaking it down into the constituent datasets, like we did above, is a reasonable approach because it captures how different research groups would measure solubility. It is not always obvious or possible to use LOCOCV, but it should be something you consider to assess out of training data distribution. You can read more about the issue of leaving training data distribution for materials in this recent article <span id="id5">[]</span>. You can read more about model selection in general in this recent tutorial article <span id="id6">[]</span>.</p>
+</section>
+</section>
+<section id="chapter-summary">
+<h2>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Regression is supervised learning where the labels are real numbers. We only considered scalars</p></li>
+<li><p>To assess a regressed model, we split data into training and testing and only report error on testing data</p></li>
+<li><p>Overfitting causes a mismatch between training and testing error</p></li>
+<li><p>Overfitting can be understood via the bias-variance decomposition</p></li>
+<li><p>Increasing model complexity can improve fit (reduce bias), but increases model variance and thus test error</p></li>
+<li><p>Regularization is a strategy to decrease model variance. L2 is a good first choice</p></li>
+<li><p>More rigorous assessment of models can be done via k-fold cross-validation or Jacknife+ when the training data is small enough that we can train multiple models</p></li>
+<li><p>Much of our model assessments depends on the testing data being from the same distribution as the training data (similar values). This is often not true and can be measured with leave-one-class-out cross-validation.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3>Overfitting<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>What happens if we have redundant features but no noise? Is it possible to overfit?</p></li>
+<li><p>We said that increasing dataset size reduces model variance. Show this by using k-fold cross-validation on a few different dataset sizes.</p></li>
+</ol>
+</section>
+<section id="id8">
+<h3>Regularization<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Implement L1 regularization on the solubility data with <span class="math notranslate nohighlight">\(N = 35\)</span> data points. Increase the strength until some feature coefficients (<span class="math notranslate nohighlight">\(w_i\)</span>) go to zero. Which ones are they? Why do you think they go to zero first?</p></li>
+<li><p>Repeat 1 with a few different sets of training data. Are your results consistent on which features disappear? Based on your results, do you think there is meaning to the features which go to zero?</p></li>
+<li><p>Implement the L-infinity (supremum norm) regularization, which returns the maxmium of the absolute values of the elements.</p></li>
+</ol>
+</section>
+<section id="model-assessment">
+<h3>Model Assessment<a class="headerlink" href="#model-assessment" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Develop the best linear model for the complete solubility dataset and assess using your best judgment. Justify your choice of model and assessment.</p></li>
+</ol>
+</section>
+</section>
+<section id="cited-references">
+<h2>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this heading">#</a></h2>
+<span class="target" id="id9"></span></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook/0_basic_MLDL"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_1_ml_supervised_unsuppersives.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Supervised vs. Unsuppervised</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2_0_dl_overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deep Learning Overview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-with-synthetic-data">Overfitting with Synthetic Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-conclusion">Overfitting Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-effect-of-feature-number">Exploring Effect of Feature Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-decomposition">Bias Variance Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">L2 Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l1-regularization">L1 Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-to-assess-models">Strategies to Assess Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">k-Fold Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cv">Leave-one-out CV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-other-measures">Computing Other Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-resampling">Bootstrap Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jacknife">Jacknife+</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">Training Data Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">Leave One Class Out Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">Model Assessment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By thangckt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

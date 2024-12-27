@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Overview</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/pytorch_deep_learning/00_overview';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="00. PyTorch Fundamentals" href="00_pytorch_fundamentals.html" />
+    <link rel="prev" title="Core Ml templates" href="../0_basic_MLDL/3_2_Model_template.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title"></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic of ML &amp; DL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0_basic_MLDL/1_0_ml_overview.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/1_1_ml_supervised_unsuppersives.html">Supervised vs. Unsuppervised</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/1_2_regression.html">Regression &amp; Model Assessment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../0_basic_MLDL/2_0_dl_overview.html">Deep Learning Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/2_1_dl_neural_network.html">What is a neural network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_basic_MLDL/2_2_layers.html">Standard Layers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_basic_MLDL/3_1_workflow.html">Workflow in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_basic_MLDL/3_2_Model_template.html">Core Ml templates</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch for Deep Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_pytorch_fundamentals.html">00. PyTorch Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_pytorch_workflow.html">01. PyTorch Workflow Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_pytorch_classification.html">02. PyTorch Neural Network Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_pytorch_computer_vision.html">03. PyTorch Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_pytorch_custom_datasets.html">04. PyTorch Custom Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_pytorch_going_modular.html">05. PyTorch Going Modular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_pytorch_transfer_learning.html">06. PyTorch Transfer Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pytorch_experiment_tracking.html">07. PyTorch Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_pytorch_paper_replicating.html">08. PyTorch Paper Replicating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_pytorch_model_deployment.html">09. PyTorch Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras/pytorch_extra_resources.html">PyTorch Extra Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras/pytorch_cheatsheet.html">PyTorch Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras/pytorch_most_common_errors.html">The Three Most Common Errors in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras/pytorch_setup.html">Setup to code PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Zero to Mastery Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../zero_to_mastery_ml/README.html">Zero to Mastery Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/1_PT_Linear_Regression.html">Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/2_PT_Logistic_Regression.html">Logistic Regression</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/thangckt/note_ml/edit/main/notebook/pytorch_deep_learning/00_overview.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button"
+   title="Suggest edit"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Overview</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-materials-outline">Course materials/outline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-course">About this course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-course-for">Who is this course for?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-prerequisites">What are the prerequisites?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-is-the-course-taught">How is the course taught?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-will-i-get-if-i-finish-the-course">What will I get if I finish the course?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-will-i-build-in-the-course">What will I build in the course?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-get-started">How do I get started?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<p>Adapted from <a class="reference external" href="https://www.learnpytorch.io/">Learn PyTorch for Deep Learning: Zero to Mastery</a>, the second best place to learn PyTorch on the internet (the first being the <a class="reference external" href="https://pytorch.org/docs/stable/index.html">PyTorch documentation</a>).</p>
+<p><a class="reference internal" href="../../_images/misc-pytorch-course-launch-cover-white-text-black-background.jpg"><img alt="" src="../../_images/misc-pytorch-course-launch-cover-white-text-black-background.jpg" style="width: 750px;" /></a> <br>
+<em>pytorch deep learning by zero to mastery cover photo with different sections of the course</em></p>
+<section id="course-materials-outline">
+<h2>Course materials/outline<a class="headerlink" href="#course-materials-outline" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>📖 <strong>Online book version:</strong> All of the course materials are available in a readable online book at <a class="reference external" href="https://learnpytorch.io">learnpytorch.io</a>.</p></li>
+<li><p>🎥 <strong>First five sections on YouTube:</strong> Learn Pytorch in a day by watching the <a class="reference external" href="https://youtu.be/Z_ikDlimN6A">first 25-hours of material</a>.</p></li>
+<li><p>🔬 <strong>Course focus:</strong> code, code, code, experiment, experiment, experiment.</p></li>
+<li><p>🏃‍♂️ <strong>Teaching style:</strong> <a class="reference external" href="https://sive.rs/kimo">https://sive.rs/kimo</a>.</p></li>
+<li><p>🤔 <strong>Ask a question:</strong> See the <a class="reference external" href="https://github.com/mrdbourke/pytorch-deep-learning/discussions">GitHub Discussions page</a> for existing questions/ask your own.</p></li>
+<li><p>See the project page for <a class="reference external" href="https://github.com/users/mrdbourke/projects/1/views/1">work-in-progress board</a></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Section</strong></p></th>
+<th class="head"><p><strong>What does it cover?</strong></p></th>
+<th class="head"><p><strong>Exercises &amp; Extra-curriculum</strong></p></th>
+<th class="head"><p><strong>Slides</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="00_pytorch_fundamentals.html"><span class="doc std std-doc">00 - PyTorch Fundamentals</span></a></p></td>
+<td><p>Many fundamental PyTorch operations used for deep learning and neural networks.</p></td>
+<td><p><a class="reference internal" href="#00_pytorch_fundamentals/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/bfe63884859c2aa36788ad783e9a543a/00_pytorch_and_deep_learning_fundamentals.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="01_pytorch_workflow.html"><span class="doc std std-doc">01 - PyTorch Workflow</span></a></p></td>
+<td><p>Provides an outline for approaching deep learning problems and building neural networks with PyTorch.</p></td>
+<td><p><a class="reference internal" href="#01_pytorch_workflow/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/39fd9a2948174bcb14c85d400357f83b/01_pytorch_workflow.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="02_pytorch_classification.html"><span class="doc std std-doc">02 - PyTorch Neural Network Classification</span></a></p></td>
+<td><p>Uses the PyTorch workflow from 01 to go through a neural network classification problem.</p></td>
+<td><p><a class="reference internal" href="#02_pytorch_classification/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/24717d26641a35e12ef46c03c925ec25/02_pytorch_classification.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="03_pytorch_computer_vision.html"><span class="doc std std-doc">03 - PyTorch Computer Vision</span></a></p></td>
+<td><p>Let’s see how PyTorch can be used for computer vision problems using the same workflow from 01 &amp; 02.</p></td>
+<td><p><a class="reference internal" href="#03_pytorch_computer_vision/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/cfbe6d4ce6b80c9c74e6ba4c585310f5/03_pytorch_computer_vision.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="04_pytorch_custom_datasets.html"><span class="doc std std-doc">04 - PyTorch Custom Datasets</span></a></p></td>
+<td><p>How do you load a custom dataset into PyTorch? Also we’ll be laying the foundations in this notebook for our modular code (covered in 05).</p></td>
+<td><p><a class="reference internal" href="#04_pytorch_custom_datasets/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/4c1d3dfeef96e1ded61feda7972728b0/04_pytorch_custom_datasets.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="05_pytorch_going_modular.html"><span class="doc std std-doc">05 - PyTorch Going Modular</span></a></p></td>
+<td><p>PyTorch is designed to be modular, let’s turn what we’ve created into a series of Python scripts (this is how you’ll often find PyTorch code in the wild).</p></td>
+<td><p><a class="reference internal" href="#05_pytorch_going_modular/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/cf8bacc569b807ee4d2d8f324e64236a/05_pytorch_going_modular.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="06_pytorch_transfer_learning.html"><span class="doc std std-doc">06 - PyTorch Transfer Learning</span></a></p></td>
+<td><p>Let’s take a well performing pre-trained model and adjust it to one of our own problems.</p></td>
+<td><p><a class="reference internal" href="#06_pytorch_transfer_learning/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/b134d41e97aac5a8626fe107b4aa230e/06_pytorch_transfer_learning.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="07_pytorch_experiment_tracking.html"><span class="doc std std-doc">07 - Milestone Project 1: PyTorch Experiment Tracking</span></a></p></td>
+<td><p>We’ve built a bunch of models… wouldn’t it be good to track how they’re all going?</p></td>
+<td><p><a class="reference internal" href="#07_pytorch_experiment_tracking/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/101a0502f6b5d6ba8bc1df18aba917a8/07_pytorch_experiment_tracking.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="08_pytorch_paper_replicating.html"><span class="doc std std-doc">08 - Milestone Project 2: PyTorch Paper Replicating</span></a></p></td>
+<td><p>PyTorch is the most popular deep learning framework for machine learning research, let’s see why by replicating a machine learning paper.</p></td>
+<td><p><a class="reference internal" href="#08_pytorch_paper_replicating/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/6711ed915f78753aca58b8b43db5af8a/08_pytorch_paper_replicating.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="09_pytorch_model_deployment.html"><span class="doc std std-doc">09 - Milestone Project 3: Model Deployment</span></a></p></td>
+<td><p>So we’ve built a working PyTorch model… how do we get it in the hands of others? Hint: deploy it to the internet.</p></td>
+<td><p><a class="reference internal" href="#09_pytorch_model_deployment/#exercises"><span class="xref myst">Go to exercises &amp; extra-curriculum</span></a></p></td>
+<td><p><a class="reference download internal" download="" href="../../_downloads/6707646e8985d66e0b6c17ce994a0bcd/09_pytorch_model_deployment.pdf"><span class="xref download myst">Go to slides</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pytorch_extra_resources/"><span class="xref myst">PyTorch Extra Resources</span></a></p></td>
+<td><p>This course covers a large amount of PyTorch and deep learning but the field of machine learning is vast, inside here you’ll find recommended books and resources for: PyTorch and deep learning, ML engineering, NLP (natural language processing), time series data, where to find datasets and more.</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pytorch_cheatsheet/"><span class="xref myst">PyTorch Cheatsheet</span></a></p></td>
+<td><p>A very quick overview of some of the main features of PyTorch plus links to various resources where more can be found in the course and in the PyTorch documentation.</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="about-this-course">
+<h2>About this course<a class="headerlink" href="#about-this-course" title="Permalink to this heading">#</a></h2>
+<section id="who-is-this-course-for">
+<h3>Who is this course for?<a class="headerlink" href="#who-is-this-course-for" title="Permalink to this heading">#</a></h3>
+<p><strong>You:</strong> Are a beginner in the field of machine learning or deep learning and would like to learn PyTorch.</p>
+<p><strong>This course:</strong> Teaches you PyTorch and many machine learning concepts in a hands-on, code-first way.</p>
+<p>If you already have 1-year+ experience in machine learning, this course may help but it is specifically designed to be beginner-friendly.</p>
+</section>
+<section id="what-are-the-prerequisites">
+<h3>What are the prerequisites?<a class="headerlink" href="#what-are-the-prerequisites" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>3-6 months coding Python.</p></li>
+<li><p>At least one beginner machine learning course (however this might be able to be skipped, resources are linked for many different topics).</p></li>
+<li><p>Experience using Jupyter Notebooks or Google Colab (though you can pick this up as we go along).</p></li>
+<li><p>A willingness to learn (most important).</p></li>
+</ol>
+<p>For 1 &amp; 2, I’d recommend the <a class="reference external" href="https://dbourke.link/ZTMMLcourse">Zero to Mastery Data Science and Machine Learning Bootcamp</a>, it’ll teach you the fundamentals of machine learning and Python (I’m biased though, I also teach that course).</p>
+</section>
+<section id="how-is-the-course-taught">
+<h3>How is the course taught?<a class="headerlink" href="#how-is-the-course-taught" title="Permalink to this heading">#</a></h3>
+<p>All of the course materials are available for free in an online book at <a class="reference external" href="https://learnpytorch.io">learnpytorch.io</a>. If you like to read, I’d recommend going through the resources there.</p>
+<p>If you prefer to learn via video, the course is also taught in apprenticeship-style format, meaning I write PyTorch code, you write PyTorch code.</p>
+<p>There’s a reason the course motto’s include <em>if in doubt, run the code</em> and <em>experiment, experiment, experiment!</em>.</p>
+<p>My whole goal is to help you to do one thing: learn machine learning by writing PyTorch code.</p>
+<p>The code is all written via <a class="reference external" href="https://colab.research.google.com">Google Colab Notebooks</a> (you could also use Jupyter Notebooks), an incredible free resource to experiment with machine learning.</p>
+</section>
+<section id="what-will-i-get-if-i-finish-the-course">
+<h3>What will I get if I finish the course?<a class="headerlink" href="#what-will-i-get-if-i-finish-the-course" title="Permalink to this heading">#</a></h3>
+<p>There are certificates and all that jazz if you go through the videos.</p>
+<p>But certificates are meh.</p>
+<p>You can consider this course a machine-learning momentum builder.</p>
+<p>By the end, you’ll have written hundreds of lines of PyTorch code.</p>
+<p>And will have been exposed to many of the most important concepts in machine learning.</p>
+<p>So when you go to build your own machine learning projects or inspect a public machine learning project made with PyTorch, it’ll feel familiar and if it doesn’t, at least you’ll know where to look.</p>
+</section>
+<section id="what-will-i-build-in-the-course">
+<h3>What will I build in the course?<a class="headerlink" href="#what-will-i-build-in-the-course" title="Permalink to this heading">#</a></h3>
+<p>We start with the barebone fundamentals of PyTorch and machine learning, so even if you’re new to machine learning you’ll be caught up to speed.</p>
+<p>Then we’ll explore more advanced areas including PyTorch neural network classification, PyTorch workflows, computer vision, custom datasets, experiment tracking, model deployment, and my personal favorite: transfer learning, a powerful technique for taking what one machine learning model has learned on another problem and applying it to your own!</p>
+<p>Along the way, you’ll build three milestone projects surrounding an overarching project called FoodVision, a neural network computer vision model to classify images of food.</p>
+<p>These milestone projects will help you practice using PyTorch to cover important machine learning concepts and create a portfolio you can show employers and say “here’s what I’ve done”.</p>
+</section>
+<section id="how-do-i-get-started">
+<h3>How do I get started?<a class="headerlink" href="#how-do-i-get-started" title="Permalink to this heading">#</a></h3>
+<p>You can read the materials on any device but this course is best viewed and coded along within a desktop browser.</p>
+<p>The course uses a free tool called Google Colab. If you’ve got no experience with it, I’d go through the free <a class="reference external" href="https://colab.research.google.com/notebooks/basic_features_overview.ipynb">Introduction to Google Colab tutorial</a> and then come back here.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook/pytorch_deep_learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../0_basic_MLDL/3_2_Model_template.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Core Ml templates</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="00_pytorch_fundamentals.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">00. PyTorch Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-materials-outline">Course materials/outline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-course">About this course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-course-for">Who is this course for?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-prerequisites">What are the prerequisites?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-is-the-course-taught">How is the course taught?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-will-i-get-if-i-finish-the-course">What will I get if I finish the course?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-will-i-build-in-the-course">What will I build in the course?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-get-started">How do I get started?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By thangckt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

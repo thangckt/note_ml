@@ -1,0 +1,1308 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PyTorch Cheatsheet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/pytorch_deep_learning/extras/pytorch_cheatsheet';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The Three Most Common Errors in PyTorch" href="pytorch_most_common_errors.html" />
+    <link rel="prev" title="PyTorch Extra Resources" href="pytorch_extra_resources.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title"></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic of ML &amp; DL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../0_basic_MLDL/1_0_ml_overview.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../0_basic_MLDL/1_1_ml_supervised_unsuppersives.html">Supervised vs. Unsuppervised</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../0_basic_MLDL/1_2_regression.html">Regression &amp; Model Assessment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../0_basic_MLDL/2_0_dl_overview.html">Deep Learning Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../0_basic_MLDL/2_1_dl_neural_network.html">What is a neural network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../0_basic_MLDL/2_2_layers.html">Standard Layers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_basic_MLDL/3_1_workflow.html">Workflow in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_basic_MLDL/3_2_Model_template.html">Core Ml templates</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch for Deep Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_pytorch_fundamentals.html">00. PyTorch Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_pytorch_workflow.html">01. PyTorch Workflow Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_pytorch_classification.html">02. PyTorch Neural Network Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_pytorch_computer_vision.html">03. PyTorch Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_pytorch_custom_datasets.html">04. PyTorch Custom Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_pytorch_going_modular.html">05. PyTorch Going Modular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pytorch_transfer_learning.html">06. PyTorch Transfer Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_pytorch_experiment_tracking.html">07. PyTorch Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_pytorch_paper_replicating.html">08. PyTorch Paper Replicating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_pytorch_model_deployment.html">09. PyTorch Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_extra_resources.html">PyTorch Extra Resources</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PyTorch Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_most_common_errors.html">The Three Most Common Errors in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_setup.html">Setup to code PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Zero to Mastery Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../zero_to_mastery_ml/README.html">Zero to Mastery Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1_Practices/1_PT_Linear_Regression.html">Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../1_Practices/2_PT_Logistic_Regression.html">Logistic Regression</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/thangckt/note_ml/edit/main/notebook/pytorch_deep_learning/extras/pytorch_cheatsheet.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button"
+   title="Suggest edit"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PyTorch Cheatsheet</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-imports">Data imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors">Creating Tensors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-libraries">Domain Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-vision">Computer Vision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-and-natural-language-processing-nlp">Text and Natural Language Processing (NLP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#audio-and-speech">Audio and Speech</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendation-systems">Recommendation systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-agnostic-code-using-pytorch-on-cpu-gpu-or-mps">Device-agnostic code (using PyTorch on CPU, GPU or MPS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-a-tensor-to-target-device">Sending a tensor to target device</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-random-seeds">Setting random seeds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-layers">Linear layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers-for-making-convolutional-neural-networks-or-cnns">Convolutional Layers (for making Convolutional Neural Networks or CNN’s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-layers-for-making-transformer-models">Transformer Layers (for making Transformer models)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers-for-making-recurrent-neural-networks-or-rnns">Recurrent Layers (for making Recurrent Neural Networks or RNN’s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">Loss Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizers">Optimizers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-example-workflow">End-to-end example workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-data">Create data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model">Create a model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-loss-function-and-optimizer">Setup loss function and optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-training-testing-loop">Create a training/testing loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">Extras</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/mrdbourke/pytorch-deep-learning/blob/main/extras/pytorch_cheatsheet.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="pytorch-cheatsheet">
+<h1>PyTorch Cheatsheet<a class="headerlink" href="#pytorch-cheatsheet" title="Permalink to this heading">#</a></h1>
+<p>Some of the most commonly used commands/setups in PyTorch.</p>
+<blockquote>
+<div><p><strong>Note:</strong> One of the best ways to get help for PyTorch specific functions and use cases is to  search “pytorch how to make a convolutional neural network” or “pytorch transformer layers” or “pytorch loss functions”. I do this regularly.</p>
+</div></blockquote>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h2>
+<p>You can install PyTorch on various platforms via the <a class="reference external" href="https://pytorch.org/get-started/locally/">PyTorch installation page</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Check the version</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyTorch version: 1.12.1+cu113
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can also import the common abbreviation &quot;nn&quot; for &quot;Neural Networks&quot;</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="c1"># Almost everything in PyTorch is called a &quot;Module&quot; (you build neural networks by stacking together Modules)</span>
+<span class="n">this_is_a_module</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                             <span class="n">out_features</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">this_is_a_module</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;torch.nn.modules.linear.Linear&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="data-imports">
+<h3>Data imports<a class="headerlink" href="#data-imports" title="Permalink to this heading">#</a></h3>
+<p>Since most of machine learning is finding patterns in data, it’s good to know how to work with datasets in PyTorch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import PyTorch Dataset (you can store your data here) and DataLoader (you can load your data here)</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-tensors">
+<h2>Creating Tensors<a class="headerlink" href="#creating-tensors" title="Permalink to this heading">#</a></h2>
+<p>One of the main use cases of PyTorch is for accelerated deep learning computing.</p>
+<p>And deep learning usually involves the manipulation of large tensors (big, multi-dimensional collections of numbers).</p>
+<p>PyTorch has a number of methods to create tensors.</p>
+<blockquote>
+<div><p><strong>Note:</strong> For a more extensive overview of creating tensors with PyTorch, see <a class="reference external" href="https://www.learnpytorch.io/00_pytorch_fundamentals/">00. PyTorch Fundamentals</a>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a single number tensor (scalar)</span>
+<span class="n">scalar</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a random tensor</span>
+<span class="n">random_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># this will create a tensor of size 3x4 but you can manipulate the shape how you want</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiply two random tensors</span>
+<span class="n">random_tensor_1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">random_tensor_2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">random_tensor_3</span> <span class="o">=</span> <span class="n">random_tensor_1</span> <span class="o">*</span> <span class="n">random_tensor_2</span> <span class="c1"># PyTorch has support for most math operators in Python (+, *, -, /)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="domain-libraries">
+<h2>Domain Libraries<a class="headerlink" href="#domain-libraries" title="Permalink to this heading">#</a></h2>
+<p>Depending on the specific problem you’re working on, PyTorch has several domain libraries.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://pytorch.org/vision/stable/index.html">TorchVision</a></strong> — PyTorch’s resident computer vision library.</p></li>
+<li><p><strong><a class="reference external" href="https://pytorch.org/text/stable/index.html">TorchText</a></strong> — PyTorch’s in-built domain library for text.</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/audio/stable/index.html"><strong>TorchAudio</strong></a> — PyTorch’s domain library for everything audio.</p></li>
+<li><p><strong><a class="reference external" href="https://pytorch.org/torchrec/">TorchRec</a></strong> — PyTorch’s newest in-built domain library for powering recommendation engines with deep learning.</p></li>
+</ul>
+<section id="computer-vision">
+<h3>Computer Vision<a class="headerlink" href="#computer-vision" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Note:</strong> For an in-depth overview of computer vision in PyTorch, see <a class="reference external" href="https://www.learnpytorch.io/03_pytorch_computer_vision/">03. PyTorch Computer Vision</a>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base computer vision library</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="c1"># Other components of TorchVision (premade datasets, pretrained models and image transforms)</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="text-and-natural-language-processing-nlp">
+<h3>Text and Natural Language Processing (NLP)<a class="headerlink" href="#text-and-natural-language-processing-nlp" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base text and natural language processing library</span>
+<span class="kn">import</span> <span class="nn">torchtext</span>
+
+<span class="c1"># Other components of TorchText (premade datasets, pretrained models and text transforms)</span>
+<span class="kn">from</span> <span class="nn">torchtext</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="audio-and-speech">
+<h3>Audio and Speech<a class="headerlink" href="#audio-and-speech" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base audio and speech processing library</span>
+<span class="kn">import</span> <span class="nn">torchaudio</span>
+
+<span class="c1"># Other components of TorchAudio (premade datasets, pretrained models and text transforms)</span>
+<span class="kn">from</span> <span class="nn">torchaudio</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recommendation-systems">
+<h3>Recommendation systems<a class="headerlink" href="#recommendation-systems" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Note:</strong> This library is currently in beta release, see the <a class="reference external" href="https://github.com/pytorch/torchrec#installation">GitHub page for installation</a>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Base recommendation system library </span>
+<span class="c1"># import torchrec</span>
+
+<span class="c1"># # Other components of TorchRec</span>
+<span class="c1"># from torchrec import datasets, models</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="device-agnostic-code-using-pytorch-on-cpu-gpu-or-mps">
+<h2>Device-agnostic code (using PyTorch on CPU, GPU or MPS)<a class="headerlink" href="#device-agnostic-code-using-pytorch-on-cpu-gpu-or-mps" title="Permalink to this heading">#</a></h2>
+<p>Much of deep learning involves computing on tensors.</p>
+<p>Computing on tensors generally happens much faster on GPUs (graphics processing units, typically from NVIDIA) than CPUs (computer processing units).</p>
+<p>MPS stands for “Metal Performance Shader” which is Apple’s GPU (M1, M1 Pro, M2 etc).</p>
+<p>It is advised to perform training on the fastest piece of hardware you have available, which will generally be: NVIDIA GPU (<code class="docutils literal notranslate"><span class="pre">&quot;cuda&quot;</span></code>) &gt; MPS device (<code class="docutils literal notranslate"><span class="pre">&quot;mps&quot;</span></code>) &gt; CPU (<code class="docutils literal notranslate"><span class="pre">&quot;cpu&quot;</span></code>).</p>
+<ul class="simple">
+<li><p>For more on seeing how to get <a class="reference external" href="https://pytorch.org/docs/stable/cuda.html">PyTorch to run on NVIDIA GPU (with CUDA)</a>, see <a class="reference external" href="https://www.learnpytorch.io/00_pytorch_fundamentals/#2-getting-pytorch-to-run-on-the-gpu">00. PyTorch Fundamentals section 2: getting PyTorch to run on the GPU</a>.</p></li>
+<li><p>For more on running PyTorch using an MPS backend (running PyTorch on Mac GPUs) <a class="reference external" href="https://pytorch.org/docs/stable/notes/mps.html">see the PyTorch documentaiton</a>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> It is advised to setup device-agnostic code at the start of your workflow.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup device-agnostic code </span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="c1"># NVIDIA GPU</span>
+<span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps_is_available</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;mps&quot;</span> <span class="c1"># Apple GPU</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using device: cuda
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sending-a-tensor-to-target-device">
+<h3>Sending a tensor to target device<a class="headerlink" href="#sending-a-tensor-to-target-device" title="Permalink to this heading">#</a></h3>
+<p>You can move objects (models and tensors) in PyTorch to different devices via the <code class="docutils literal notranslate"><span class="pre">.to(&quot;device_name&quot;)</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a tensor </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="c1"># defaults to CPU </span>
+
+<span class="c1"># Send tensor to target device</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cpu
+cuda:0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="setting-random-seeds">
+<h2>Setting random seeds<a class="headerlink" href="#setting-random-seeds" title="Permalink to this heading">#</a></h2>
+<p>A lot of machine learning and deep learning involves taking random numbers in tensors and then shaping those random numbers to find/represent patterns in real data.</p>
+<p>However, sometimes you’ll want “reproducible” randomness.</p>
+<p>To do so, you can set the random seeds, see <a class="reference external" href="https://www.learnpytorch.io/00_pytorch_fundamentals/#reproducibility-trying-to-take-the-random-out-of-random">Reproducibility (trying to take the random out of random)</a> for more.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Set the random seed (you can set this to any number you like, it will &quot;flavour&quot;</span>
+<span class="c1"># the randomness with that number.</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Create two random tensors</span>
+<span class="n">random_tensor_A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># set the seed again (try commenting this out and see what happens)</span>
+<span class="n">random_tensor_B</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tensor A:</span><span class="se">\n</span><span class="si">{</span><span class="n">random_tensor_A</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tensor B:</span><span class="se">\n</span><span class="si">{</span><span class="n">random_tensor_B</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does Tensor A equal Tensor B? (anywhere)&quot;</span><span class="p">)</span>
+<span class="n">random_tensor_A</span> <span class="o">==</span> <span class="n">random_tensor_B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor A:
+tensor([[0.8823, 0.9150, 0.3829, 0.9593],
+        [0.3904, 0.6009, 0.2566, 0.7936],
+        [0.9408, 0.1332, 0.9346, 0.5936]])
+
+Tensor B:
+tensor([[0.8823, 0.9150, 0.3829, 0.9593],
+        [0.3904, 0.6009, 0.2566, 0.7936],
+        [0.9408, 0.1332, 0.9346, 0.5936]])
+
+Does Tensor A equal Tensor B? (anywhere)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[True, True, True, True],
+        [True, True, True, True],
+        [True, True, True, True]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also set the random seed on the GPU (CUDA devices).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed on GPU</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="neural-networks">
+<h2>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this heading">#</a></h2>
+<p>PyTorch has a very comprehensive library of pre-built neural network components (many of these are referred to as “modules” in the PyTorch ecosystem).</p>
+<p>At a fundamental level neural networks are stacks of <em>layers</em>. Each of these layers performs some kind of operation on an input and produces an output.</p>
+<p>How these layers stack together will depend on the problem you’re working on.</p>
+<p>One of the most active areas of research in machine learnin is how to stack neural network layers together (and the best answer to this is constantly changing).</p>
+<p>The vast majority of neural network components in PyTorch are contained within the <a class="reference external" href="https://pytorch.org/docs/stable/nn.html"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> package</a> (<code class="docutils literal notranslate"><span class="pre">nn</span></code> is short for neural networks).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="linear-layers">
+<h3>Linear layers<a class="headerlink" href="#linear-layers" title="Permalink to this heading">#</a></h3>
+<p>PyTorch has several in-built <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#linear-layers">linear layers</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a linear layer with 10 in features and out features</span>
+<span class="n">linear_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                         <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an Identity layer</span>
+<span class="n">identity_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convolutional-layers-for-making-convolutional-neural-networks-or-cnns">
+<h3>Convolutional Layers (for making Convolutional Neural Networks or CNN’s)<a class="headerlink" href="#convolutional-layers-for-making-convolutional-neural-networks-or-cnns" title="Permalink to this heading">#</a></h3>
+<p>PyTorch has <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#convolution-layers">several in-built convolutional layers</a>.</p>
+<p>Naming of convolutional layers usually follows <code class="docutils literal notranslate"><span class="pre">torch.nn.ConvXd</span></code> where <code class="docutils literal notranslate"><span class="pre">X</span></code> can be a value of <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">X</span></code> value represents the number of dimensions the convolution will operate over, for example, <code class="docutils literal notranslate"><span class="pre">1</span></code> for singular dimension text, <code class="docutils literal notranslate"><span class="pre">2</span></code> for two dimension images (height x width) and <code class="docutils literal notranslate"><span class="pre">3</span></code> for 3D objects such as video (video is considered a series of images with a time dimension, height x width x time).</p>
+<blockquote>
+<div><p><strong>Note:</strong> You can see more on building convolutional neural networks for computer vision with PyTorch in <a class="reference external" href="https://www.learnpytorch.io/03_pytorch_computer_vision/#7-model-2-building-a-convolutional-neural-network-cnn">03. PyTorch Computer Vision section 7.2: building a convolutional neural network (CNN)</a>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Conv1d layer (often used for text with a singular dimension)</span>
+<span class="n">conv1d</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">out_channels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                   <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Conv2d layer (often used for images with Height x Width dimensions)</span>
+<span class="n">conv2d</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="c1"># 3 channels for color images (red, green, blue)</span>
+                   <span class="n">out_channels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                   <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>                   
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Conv3d layer (often used for video with Height x Width x Time dimensions)</span>
+<span class="n">conv3d</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">out_channels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                   <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transformer-layers-for-making-transformer-models">
+<h3>Transformer Layers (for making Transformer models)<a class="headerlink" href="#transformer-layers-for-making-transformer-models" title="Permalink to this heading">#</a></h3>
+<p>PyTorch has in-built Transformer layers as described in the paper <a class="reference external" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>.</p>
+<p>Using in-built PyTorch Transformer layers has the benefit of potential speedups thanks to <a class="reference external" href="https://pytorch.org/blog/a-better-transformer-for-fast-transformer-encoder-inference/">PyTorch’s BetterTransformer</a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> You can see the use of PyTorch’s in-built Transformer layers to build a Vision Transformer in <a class="reference external" href="https://www.learnpytorch.io/08_pytorch_paper_replicating/">08. PyTorch Paper Replicating</a>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Transformer model (model based on the paper &quot;Attention Is All You Need&quot; - https://arxiv.org/abs/1706.03762)</span>
+<span class="n">transformer_model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Transformer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a single Transformer encoder cell</span>
+<span class="n">transformer_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoderLayer</span><span class="p">(</span><span class="n">d_model</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="c1"># embedding dimension</span>
+                                                 <span class="n">nhead</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># number of attention heads</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stack together Transformer encoder cells</span>
+<span class="n">transformer_encoder_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoder</span><span class="p">(</span><span class="n">encoder_layer</span><span class="o">=</span><span class="n">transformer_encoder</span><span class="p">,</span> <span class="c1"># from above</span>
+                                                  <span class="n">num_layers</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># 6 Transformer encoders stacked on top of each other</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a single Transformer decoder cell</span>
+<span class="n">transformer_decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerDecoderLayer</span><span class="p">(</span><span class="n">d_model</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span>
+                                                 <span class="n">nhead</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stack together Transformer decoder cells</span>
+<span class="n">transformer_decoder_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerDecoder</span><span class="p">(</span><span class="n">decoder_layer</span><span class="o">=</span><span class="n">transformer_decoder</span><span class="p">,</span> <span class="c1"># from above</span>
+                                                  <span class="n">num_layers</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># 6 Transformer decoders stacked on top of each other</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recurrent-layers-for-making-recurrent-neural-networks-or-rnns">
+<h3>Recurrent Layers (for making Recurrent Neural Networks or RNN’s)<a class="headerlink" href="#recurrent-layers-for-making-recurrent-neural-networks-or-rnns" title="Permalink to this heading">#</a></h3>
+<p>PyTorch has in-built support for <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#recurrent-layers">Recurrent Neural Network layers</a> such as <a class="reference external" href="https://en.wikipedia.org/wiki/Long_short-term_memory">long short-term memory (LSTM)</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Gated_recurrent_unit">gated recurrent unit (GRU)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a single LSTM cell</span>
+<span class="n">lstm_cell</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTMCell</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># can adjust as necessary</span>
+                        <span class="n">hidden_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># can adjust as necessary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stack together LSTM cells</span>
+<span class="n">lstm_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">hidden_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">num_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 3 single LSTM cells stacked on top of each other</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a single GRU cell</span>
+<span class="n">gru_cell</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRUCell</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># can adjust as necessary</span>
+                      <span class="n">hidden_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># can adjust as necessary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stack together GRU cells</span>
+<span class="n">gru_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                   <span class="n">hidden_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                   <span class="n">num_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 3 single GRU cells stacked on top of each other </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="activation-functions">
+<h3>Activation Functions<a class="headerlink" href="#activation-functions" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">Activation functions</a> often go between layers in a neural network to add non-linear (non-straight) capabilities to linear (straight) functions.</p>
+<p>In essence, a neural network is often comprised of a large amount of linear and non-linear functions.</p>
+<p>PyTorch has <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">several non-linear activation functions</a> built into <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>.</p>
+<p>Some of the most common are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.ReLU</span></code> - also known as <a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">rectified linear unit</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Sigmoid</span></code> - also known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid function</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Softmax</span></code> - also known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax function</a>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> See <a class="reference external" href="https://www.learnpytorch.io/02_pytorch_classification/#6-the-missing-piece-non-linearity">02. PyTorch Neural Network Classification section 6: non-linearity, the missing piece</a> for more.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ReLU</span>
+<span class="n">relu</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+
+<span class="c1"># Sigmoid</span>
+<span class="n">sigmoid</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+
+<span class="c1"># Softmax</span>
+<span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loss-functions">
+<h3>Loss Functions<a class="headerlink" href="#loss-functions" title="Permalink to this heading">#</a></h3>
+<p>A loss function measures how <em>wrong</em> your model is. As in, how far are its predictions off where they should be.</p>
+<p>Ideally, with training, data and an optimization function, this loss value goes as low as possible.</p>
+<p>Loss functions in PyTorch (and deep learning in general) are also often referred to as: criterion, cost function.</p>
+<p>PyTorch has <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#loss-functions">several loss functions</a> built into <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>.</p>
+<p>And some of the most common are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss"><code class="docutils literal notranslate"><span class="pre">nn.L1Loss</span></code></a> - also referred to as MAE or <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_absolute_error">mean absolute error</a> (this loss is often used for regression problems or predicting a number such as the price of houses).</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss"><code class="docutils literal notranslate"><span class="pre">nn.MSELoss</span></code></a> - also referred to as L2Loss or <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">mean squared error</a> (this loss is often used for regression problems or predicting a number such as the price of houses).</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html#torch.nn.BCEWithLogitsLoss"><code class="docutils literal notranslate"><span class="pre">nn.BCEWithLogitsLoss</span></code></a> - also known as <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">binary cross entropy</a> this loss function is often used for binary classification probelms (classifying something as one thing or another).</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss"><code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss</span></code></a> - this loss function is often used for multi-class classification problems (classifying something as one thing or another).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># L1Loss</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">()</span> <span class="c1"># also known as MAE or mean absolute error</span>
+
+<span class="c1"># MSELoss</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span> <span class="c1"># also known as MSE or mean squared error</span>
+
+<span class="c1"># Binary cross entropy (for binary classification problems)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">()</span>
+
+<span class="c1"># Cross entropy (for multi-class classification problems)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimizers">
+<h3>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this heading">#</a></h3>
+<p>An optimizer’s job is to change the neural network weights in such a way that it reduces the loss function value.</p>
+<p>PyTorch has <a class="reference external" href="https://pytorch.org/docs/stable/optim.html">several optimization functions</a> built into the <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> module.</p>
+<p>Two of the main optimizer functions include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.SGD.html#torch.optim.SGD"><code class="docutils literal notranslate"><span class="pre">torch.optim.SGD(lr=0.1,</span> <span class="pre">params=model.parameters())</span></code></a> - SGD also known as <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">stochastic gradient descent</a> (<code class="docutils literal notranslate"><span class="pre">lr</span></code> stands for “learning rate”, the multiplier of how much to modify neural network weights at each step, small value = small adjustments, big value = big adjustments).</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html#torch.optim.Adam"><code class="docutils literal notranslate"><span class="pre">torch.optim.Adam(lr=0.001,</span> <span class="pre">params=model.parameters())</span></code></a> - The Adam optimizer (<code class="docutils literal notranslate"><span class="pre">params</span></code> stands for “model parameters”, in other words, the model parameters/weights you’d like the optimization function to optimize during training).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a baseline model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Transformer</span><span class="p">()</span>
+
+<span class="c1"># SGD (stochastic gradient descent)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="c1"># set the learning rate (required)</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="c1"># tell the optimizer what parameters to optimize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a baseline model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Transformer</span><span class="p">()</span>
+
+<span class="c1"># Adam optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="c1"># set the learning rate (required)</span>
+                             <span class="n">params</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="c1"># tell the optimizer what parameters to optimize</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="end-to-end-example-workflow">
+<h2>End-to-end example workflow<a class="headerlink" href="#end-to-end-example-workflow" title="Permalink to this heading">#</a></h2>
+<p>Let’s put everything together in a quick end-to-end workflow.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/01_a_pytorch_workflow.png"><img alt="a PyTorch workflow from data to building a model to fitting a model to evaluating the model" src="https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/01_a_pytorch_workflow.png" style="width: 950px;" /></a>
+<p>This workflow has been taken from <a class="reference external" href="https://www.learnpytorch.io/01_pytorch_workflow/">01. PyTorch Workflow Fundamentals</a>.</p>
+<section id="create-data">
+<h3>Create data<a class="headerlink" href="#create-data" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create *known* parameters</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="c1"># Create data</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">bias</span> <span class="c1"># labels (want model to learn from data to predict these)</span>
+
+<span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[0.0000],
+         [0.0200],
+         [0.0400],
+         [0.0600],
+         [0.0800],
+         [0.1000],
+         [0.1200],
+         [0.1400],
+         [0.1600],
+         [0.1800]]),
+ tensor([[0.3000],
+         [0.3140],
+         [0.3280],
+         [0.3420],
+         [0.3560],
+         [0.3700],
+         [0.3840],
+         [0.3980],
+         [0.4120],
+         [0.4260]]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create train/test split</span>
+<span class="n">train_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="c1"># 80% of data used for training set, 20% for testing </span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">train_split</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_split</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_split</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_split</span><span class="p">:]</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 40, 10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-model">
+<h3>Create a model<a class="headerlink" href="#create-a-model" title="Permalink to this heading">#</a></h3>
+<p>Two main ways to create a model in PyTorch:</p>
+<ol class="arabic simple">
+<li><p>Subclass <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> - more code but can be very flexible, models that subclass <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> must implement a <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code> - less code but less flexibility.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="c1"># Option 1 - subclass torch.nn.Module</span>
+<span class="k">class</span> <span class="nc">LinearRegressionModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># Use nn.Linear() for creating the model parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                      <span class="n">out_features</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Define the forward computation (input data x flows through nn.Linear())</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model_0</span> <span class="o">=</span> <span class="n">LinearRegressionModel</span><span class="p">()</span>
+<span class="n">model_0</span><span class="p">,</span> <span class="n">model_0</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(LinearRegressionModel(
+   (linear_layer): Linear(in_features=1, out_features=1, bias=True)
+ ),
+ OrderedDict([(&#39;linear_layer.weight&#39;, tensor([[0.5025]])),
+              (&#39;linear_layer.bias&#39;, tensor([-0.0722]))]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create the same model as above but using <code class="docutils literal notranslate"><span class="pre">torch.nn.Sequential</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="c1"># Option 2 - use torch.nn.Sequential</span>
+<span class="n">model_1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">out_features</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">model_1</span><span class="p">,</span> <span class="n">model_1</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Sequential(
+   (0): Linear(in_features=1, out_features=1, bias=True)
+ ),
+ OrderedDict([(&#39;0.weight&#39;, tensor([[0.9905]])), (&#39;0.bias&#39;, tensor([0.9053]))]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-loss-function-and-optimizer">
+<h3>Setup loss function and optimizer<a class="headerlink" href="#setup-loss-function-and-optimizer" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create loss function</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">()</span>
+
+<span class="c1"># Create optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">model_1</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="c1"># optimize newly created model&#39;s parameters</span>
+                            <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-training-testing-loop">
+<h3>Create a training/testing loop<a class="headerlink" href="#create-a-training-testing-loop" title="Permalink to this heading">#</a></h3>
+<p>Our goal is to reduce the loss of our model (how much our model’s predictions are different to the actual data).</p>
+<p>If our training/testing loops are implemented right and the model is capable of learning patterns in the data, the training and test losses should go down.</p>
+<p>See the following for steps in a PyTorch training loop:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://youtu.be/Nutpusq_AFw">PyTorch optimization loop song</a></p></li>
+<li><p><a class="reference external" href="https://www.learnpytorch.io/01_pytorch_workflow/#pytorch-training-loop">PyTorch Workflow Fundamentals Section 3: Training Loop</a></p></li>
+<li><p><a class="reference external" href="https://www.learnpytorch.io/01_pytorch_workflow/#pytorch-testing-loop">PyTorch Workflow Fundamentals Section 3: Testing Loop</a></p></li>
+<li><p><a class="reference external" href="https://www.learnpytorch.io/01_pytorch_workflow/#63-training">PyTorch Workflow Fundamentals Section 6.3: Training</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Set the number of epochs </span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1000</span> 
+
+<span class="c1"># Put data on the available device</span>
+<span class="c1"># Without this, an error will happen (not all data on target device)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Put model on the available device</span>
+<span class="c1"># With this, an error will happen (the model is not on target device)</span>
+<span class="n">model_1</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1">### Training</span>
+    <span class="n">model_1</span><span class="o">.</span><span class="n">train</span><span class="p">()</span> <span class="c1"># train mode is on by default after construction</span>
+
+    <span class="c1"># 1. Forward pass</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># 2. Calculate loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># 3. Zero grad optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># 4. Loss backward</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># 5. Step the optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="c1">### Testing</span>
+    <span class="n">model_1</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="c1"># put the model in evaluation mode for testing (inference)</span>
+    <span class="c1"># 1. Forward pass</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+        <span class="c1"># 2. Calculate the loss</span>
+        <span class="n">test_loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2"> | Train loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">}</span><span class="s2"> | Test loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 | Train loss: 0.7185534834861755 | Test loss: 0.8503350615501404
+Epoch: 100 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 200 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 300 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 400 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 500 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 600 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 700 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 800 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+Epoch: 900 | Train loss: 0.008362660184502602 | Test loss: 0.005596184637397528
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="extras">
+<h2>Extras<a class="headerlink" href="#extras" title="Permalink to this heading">#</a></h2>
+<p>The above list is not exhaustive.</p>
+<p>Here are some good places to find out more:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pytorch.org/tutorials/beginner/ptcheat.html">PyTorch official cheatsheet</a>.</p></li>
+<li><p><a class="reference external" href="https://dbourke.link/ZTMPyTorch">Zero to Mastery Learn PyTorch course</a> - a comprehensive yet beginner-friendly deep dive into using PyTorch for deep learning all the way from the fundamentals to deploying a model to the real-world so other people can use it.</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html">PyTorch performance tuning guide</a> - a resource from the PyTorch team on how to tune performance of PyTorch models.</p></li>
+<li><p><a class="reference external" href="https://www.learnpytorch.io/pytorch_extra_resources/">PyTorch Extra Resources</a> - a curated list of helpful resources to extend PyTorch and learn more about the engineering side of things around deep learning.</p></li>
+<li><p><a class="reference external" href="https://github.com/vahidk/EffectivePyTorch">Effective PyTorch by vahidk</a> - a GitHub repo with a fantastic overview of some of the main functionality in PyTorch in a straight-foward manner.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook/pytorch_deep_learning/extras"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pytorch_extra_resources.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PyTorch Extra Resources</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pytorch_most_common_errors.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Three Most Common Errors in PyTorch</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-imports">Data imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors">Creating Tensors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-libraries">Domain Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-vision">Computer Vision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-and-natural-language-processing-nlp">Text and Natural Language Processing (NLP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#audio-and-speech">Audio and Speech</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendation-systems">Recommendation systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-agnostic-code-using-pytorch-on-cpu-gpu-or-mps">Device-agnostic code (using PyTorch on CPU, GPU or MPS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-a-tensor-to-target-device">Sending a tensor to target device</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-random-seeds">Setting random seeds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-layers">Linear layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers-for-making-convolutional-neural-networks-or-cnns">Convolutional Layers (for making Convolutional Neural Networks or CNN’s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-layers-for-making-transformer-models">Transformer Layers (for making Transformer models)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers-for-making-recurrent-neural-networks-or-rnns">Recurrent Layers (for making Recurrent Neural Networks or RNN’s)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">Loss Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizers">Optimizers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-example-workflow">End-to-end example workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-data">Create data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model">Create a model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-loss-function-and-optimizer">Setup loss function and optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-training-testing-loop">Create a training/testing loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extras">Extras</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By thangckt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

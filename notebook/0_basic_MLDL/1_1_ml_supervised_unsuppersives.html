@@ -1,0 +1,1324 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Supervised vs. Unsuppervised</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/0_basic_MLDL/1_1_ml_supervised_unsuppersives';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Regression &amp; Model Assessment" href="1_2_regression.html" />
+    <link rel="prev" title="Machine Learning" href="1_0_ml_overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title"></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic of ML &amp; DL</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="1_0_ml_overview.html">Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Supervised vs. Unsuppervised</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_2_regression.html">Regression &amp; Model Assessment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2_0_dl_overview.html">Deep Learning Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_1_dl_neural_network.html">What is a neural network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_2_layers.html">Standard Layers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="3_1_workflow.html">Workflow in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_Model_template.html">Core Ml templates</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/00_pytorch_fundamentals.html">00. PyTorch Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/01_pytorch_workflow.html">01. PyTorch Workflow Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/02_pytorch_classification.html">02. PyTorch Neural Network Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/03_pytorch_computer_vision.html">03. PyTorch Computer Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/04_pytorch_custom_datasets.html">04. PyTorch Custom Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/05_pytorch_going_modular.html">05. PyTorch Going Modular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/06_pytorch_transfer_learning.html">06. PyTorch Transfer Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/07_pytorch_experiment_tracking.html">07. PyTorch Experiment Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/08_pytorch_paper_replicating.html">08. PyTorch Paper Replicating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/09_pytorch_model_deployment.html">09. PyTorch Model Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_extra_resources.html">PyTorch Extra Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_cheatsheet.html">PyTorch Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_most_common_errors.html">The Three Most Common Errors in PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_deep_learning/extras/pytorch_setup.html">Setup to code PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Zero to Mastery Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../zero_to_mastery_ml/README.html">Zero to Mastery Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/1_PT_Linear_Regression.html">Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1_Practices/2_PT_Logistic_Regression.html">Logistic Regression</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/thangckt/note_ml/edit/main/notebook/0_basic_MLDL/1_1_ml_supervised_unsuppersives.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button"
+   title="Suggest edit"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Supervised vs. Unsuppervised</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-correlation">Feature Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-curve">Training Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize-features">Standardize features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-model-performance">Analyzing Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-cluster-number">Choosing Cluster Number</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="supervised-vs-unsuppervised">
+<h1>Supervised vs. Unsuppervised<a class="headerlink" href="#supervised-vs-unsuppervised" title="Permalink to this heading">#</a></h1>
+<div class="admonition-objectives admonition">
+<p class="admonition-title">Objectives</p>
+<p>In this chapter</p>
+<ul class="simple">
+<li><p>Define features, labels</p></li>
+<li><p>Distinguish between supervised and unsupervised learning</p></li>
+<li><p>Understand what a loss function is and how it can be minimized with gradient descent</p></li>
+<li><p>Understand what model is and its connection to features and labels</p></li>
+<li><p>Be able to cluster data and describe what it tells us about data</p></li>
+</ul>
+</div>
+<section id="supervised-learning">
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this heading">#</a></h2>
+<p><strong>Supervised learning</strong> means predicting <span class="math notranslate nohighlight">\(y\)</span> from <span class="math notranslate nohighlight">\(\vec{x}\)</span> with a model trained on data. It is <em>supervised</em> because we tell the algorithm what the labels are in our dataset. Another method we’ll explore is <strong>unsupervised learning</strong> where we do not tell the algorithm the labels. We’ll see this supervised/unsupervised distinction can be more subtle later on, but this is a great definition for now.</p>
+<p>To see an example, we will use a dataset called AqSolDB<span id="id1">[]</span> that is about 10,000 unique compounds with measured solubility in water (label). The dataset also includes molecular properties (features) that we can use for machine learning. The solubility measurement is solubility of the compound in water in units of log molarity.</p>
+<p>To install packages, execute this code in a new cell.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install &quot;jax[cpu]===0.3.14&quot; -f https://whls.blob.core.windows.net/unstable/index.html --use-deprecated legacy-resolver
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## set env</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span>  <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">dir_nb</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;_dh&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>  
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">jax.example_libraries</span> <span class="kn">import</span> <span class="n">optimizers</span>
+<span class="kn">import</span> <span class="nn">sklearn.manifold</span><span class="o">,</span> <span class="nn">sklearn.cluster</span>
+<span class="kn">import</span> <span class="nn">rdkit</span><span class="o">,</span> <span class="nn">rdkit.Chem</span><span class="o">,</span> <span class="nn">rdkit.Chem.Draw</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_nb</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="s2">&quot;code/light.mplstyle&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-data">
+<h3>Load Data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h3>
+<p>Download the data and load it into a <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soldata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="s2">&quot;https://github.com/whitead/dmol-book/raw/main/data/curated-solubility-dataset.csv&quot;</span><span class="p">)</span>
+<span class="n">soldata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>InChI</th>
+      <th>InChIKey</th>
+      <th>SMILES</th>
+      <th>Solubility</th>
+      <th>SD</th>
+      <th>Ocurrences</th>
+      <th>Group</th>
+      <th>MolWt</th>
+      <th>...</th>
+      <th>NumRotatableBonds</th>
+      <th>NumValenceElectrons</th>
+      <th>NumAromaticRings</th>
+      <th>NumSaturatedRings</th>
+      <th>NumAliphaticRings</th>
+      <th>RingCount</th>
+      <th>TPSA</th>
+      <th>LabuteASA</th>
+      <th>BalabanJ</th>
+      <th>BertzCT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A-3</td>
+      <td>N,N,N-trimethyloctadecan-1-aminium bromide</td>
+      <td>InChI=1S/C21H46N.BrH/c1-5-6-7-8-9-10-11-12-13-...</td>
+      <td>SZEMGTQCPRNXEG-UHFFFAOYSA-M</td>
+      <td>[Br-].CCCCCCCCCCCCCCCCCC[N+](C)(C)C</td>
+      <td>-3.616127</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>392.510</td>
+      <td>...</td>
+      <td>17.0</td>
+      <td>142.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>158.520601</td>
+      <td>0.000000e+00</td>
+      <td>210.377334</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A-4</td>
+      <td>Benzo[cd]indol-2(1H)-one</td>
+      <td>InChI=1S/C11H7NO/c13-11-8-5-1-3-7-4-2-6-9(12-1...</td>
+      <td>GPYLCFQEKPUWLD-UHFFFAOYSA-N</td>
+      <td>O=C1Nc2cccc3cccc1c23</td>
+      <td>-3.254767</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>169.183</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>62.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>29.10</td>
+      <td>75.183563</td>
+      <td>2.582996e+00</td>
+      <td>511.229248</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A-5</td>
+      <td>4-chlorobenzaldehyde</td>
+      <td>InChI=1S/C7H5ClO/c8-7-3-1-6(5-9)2-4-7/h1-5H</td>
+      <td>AVPYQKSLYISFPO-UHFFFAOYSA-N</td>
+      <td>Clc1ccc(C=O)cc1</td>
+      <td>-2.177078</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>140.569</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>46.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>17.07</td>
+      <td>58.261134</td>
+      <td>3.009782e+00</td>
+      <td>202.661065</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A-8</td>
+      <td>zinc bis[2-hydroxy-3,5-bis(1-phenylethyl)benzo...</td>
+      <td>InChI=1S/2C23H22O3.Zn/c2*1-15(17-9-5-3-6-10-17...</td>
+      <td>XTUPUYCJWKHGSW-UHFFFAOYSA-L</td>
+      <td>[Zn++].CC(c1ccccc1)c2cc(C(C)c3ccccc3)c(O)c(c2)...</td>
+      <td>-3.924409</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>756.226</td>
+      <td>...</td>
+      <td>10.0</td>
+      <td>264.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>120.72</td>
+      <td>323.755434</td>
+      <td>2.322963e-07</td>
+      <td>1964.648666</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A-9</td>
+      <td>4-({4-[bis(oxiran-2-ylmethyl)amino]phenyl}meth...</td>
+      <td>InChI=1S/C25H30N2O4/c1-5-20(26(10-22-14-28-22)...</td>
+      <td>FAUAZXVRLVIARB-UHFFFAOYSA-N</td>
+      <td>C1OC1CN(CC2CO2)c3ccc(Cc4ccc(cc4)N(CC5CO5)CC6CO...</td>
+      <td>-4.662065</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>422.525</td>
+      <td>...</td>
+      <td>12.0</td>
+      <td>164.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>56.60</td>
+      <td>183.183268</td>
+      <td>1.084427e+00</td>
+      <td>769.899934</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 26 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="data-exploration">
+<h3>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title">EDA</p>
+<p>If doing EDA as a way to choose features, you should do the train/test/(valid) split prior to EDA to avoid
+contaminating model selection with test data.</p>
+</aside>
+<p>We can see that there are a number of features like molecular weight, rotatable bonds, valence electrons, etc. And of course, there is the label <strong>solubility</strong>. One of the first things we should always do is get familiar with our data in a process that is sometimes called <strong>exploratory data analysis</strong> (EDA).</p>
+<p>Let’s start by examining a few specific examples to get a sense of the range of labels/data. First, look at the extreme values to get a sense of the <strong>range</strong> of solubility data and the molecules that make it. First, we’ll histogram (using <code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.distplot</span></code>) the solubility which tells us about the shape of its probability distribution and the extreme values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/475f5756efbc1dc5f115bf140c5853108018007f5ac5ce09301d7fd80cbad14a.png" src="../../_images/475f5756efbc1dc5f115bf140c5853108018007f5ac5ce09301d7fd80cbad14a.png" />
+</div>
+</div>
+<p>Above we can see the histogram of the solubility with kernel density estimate overlaid. The histogram shows that the solubility varies from about -13 to 2.5 and is not normally distributed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get 3 lowest and 3 highest solubilities</span>
+<span class="n">soldata_sorted</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Solubility&quot;</span><span class="p">)</span>
+<span class="n">extremes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">soldata_sorted</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">soldata_sorted</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]])</span>
+
+<span class="c1"># We need to have a list of strings for legends</span>
+<span class="n">legend_text</span> <span class="o">=</span> <span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">ID</span><span class="si">}</span><span class="s2">: solubility = </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">Solubility</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">extremes</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()</span> <span class="p">]</span>
+
+<span class="c1"># now plot them on a grid</span>
+<span class="n">extreme_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span> <span class="k">for</span> <span class="n">inchi</span> <span class="ow">in</span> <span class="n">extremes</span><span class="o">.</span><span class="n">InChI</span><span class="p">]</span>
+<span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span> <span class="n">extreme_mols</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">legends</span><span class="o">=</span><span class="n">legend_text</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6ca41ed5e91c3b0b35cfa6cedb3263454bf1b75821940574d37dc04f3a006d5a.png" src="../../_images/6ca41ed5e91c3b0b35cfa6cedb3263454bf1b75821940574d37dc04f3a006d5a.png" />
+</div>
+</div>
+<p>The figure of extreme molecules shows highly-chlorinated compounds have the lowest solubility and ionic compounds have higher solubility. Is A-2918 an <strong>outlier</strong>, a mistake? Also, is NH<span class="math notranslate nohighlight">\(_3\)</span> really comparable to these organic compounds? These are the kind of questions that you should consider <em>before</em> doing any modeling.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Outliers</p>
+<p>Outliers are extreme values that fall outside of your normal data distribution. They can be mistakes or be from a different distribution (e.g., metals instead of organic molecules). Outliers can have a strong effect on model training.</p>
+</aside>
+</section>
+<section id="feature-correlation">
+<h3>Feature Correlation<a class="headerlink" href="#feature-correlation" title="Permalink to this heading">#</a></h3>
+<p>Now let’s examine the features and see how correlated they are with solubility. Note that there are a few columns unrelated to features or solubility: <code class="docutils literal notranslate"><span class="pre">SD</span></code> (standard deviation), <code class="docutils literal notranslate"><span class="pre">Ocurrences</span></code> (how often the molecule occurred in the constituent databases), and <code class="docutils literal notranslate"><span class="pre">Group</span></code> (where the data came from).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># soldata.columns.tolist()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_start_at</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;MolWt&quot;</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">features_start_at</span><span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># so we don&#39;t have to slice by row and column</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_names</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span> <span class="n">soldata</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="p">)</span>  <span class="c1"># add some color</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Solubility&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="c1"># hide empty subplots</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">axs</span><span class="p">)):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3481d6b23f5eaa5418316490fea533864021e4df36adf9e548563641e96eb9bf.png" src="../../_images/3481d6b23f5eaa5418316490fea533864021e4df36adf9e548563641e96eb9bf.png" />
+</div>
+</div>
+<p>It’s interesting that molecular weight or hydrogen bond numbers seem to have little correlation, at least from this plot. MolLogP, which is a calculated descriptor related to solubility, does correlate well. You can also see that some of these features have low <strong>variance</strong>, meaning the value of the feature changes little or not at all for many data points (e.g., “NumHDonors”).</p>
+</section>
+<section id="linear-model">
+<h3>Linear Model<a class="headerlink" href="#linear-model" title="Permalink to this heading">#</a></h3>
+<p>Let’s begin with one of the simplest approaches — a linear model. This is our first type of supervised learning and is rarely used due to something we’ll see — the difficult choice of features.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Autodiff</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">Autodiff</a> is a computer program tool
+that can compute analytical gradients with respect to two variables in a program.</p>
+</aside>
+<p>Our model will be defined by this equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1c12ff80-3c8a-4445-a224-3c7db880a543">
+<span class="eqno">(1)<a class="headerlink" href="#equation-1c12ff80-3c8a-4445-a224-3c7db880a543" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    y = \vec{w} \cdot \vec{x} + b
+\end{equation}\]</div>
+<p>which is defined for a single data point. The shape of a single feature vector,  <span class="math notranslate nohighlight">\(\vec{x}\)</span>, is 17 in our case (for the 17 features). <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a vector of adjustable parameters of length 17 and <span class="math notranslate nohighlight">\(b\)</span> is an adjustable scalar (called <strong>bias</strong>).</p>
+<p>We’ll implement this model using a library called <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/quickstart.html"><code class="docutils literal notranslate"><span class="pre">jax</span></code></a> that is very similar to numpy except it can compute analytical gradients easily via autodiff.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+
+
+<span class="c1"># test it out</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">4.3</span>
+
+<span class="n">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DeviceArray(5.5, dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Loss</p>
+<p>A loss is a function which takes in a model prediction <span class="math notranslate nohighlight">\(\hat{y}\)</span>,
+labels <span class="math notranslate nohighlight">\(y\)</span>, and computes a scalar representing how poor the fit is.
+Our goal is to minimize loss.</p>
+</aside>
+<p>Now comes the critical question: <em>How do we find the adjustable parameters <span class="math notranslate nohighlight">\(\vec{w}\)</span> and <span class="math notranslate nohighlight">\(b\)</span></em>? The classic solution for linear regression is computing the adjustable parameters directly with a pseudo-inverse, <span class="math notranslate nohighlight">\(\vec{w} = (X^TX)^{-1}X^{T}\vec{y}\)</span>. You can read more about <a class="reference external" href="https://nbviewer.jupyter.org/github/whitead/numerical_stats/blob/master/unit_12/lectures/lecture_1.ipynb#Extending-Least-Squares-to-Multiple-Dimensions-in-Domain---OLS-ND">this here</a>. We’ll use an <strong>iterative</strong> approach that mirrors what we’ll do in deep learning. This is not the correct approach for linear regression, but it’ll be useful for us to get used to the iterative approach since we’ll see it so often in deep learning.</p>
+<p>To iteratively find our adjustable parameters, we will pick a <strong>loss</strong> function and minimize with <strong>gradients</strong>. Let’s define these quantities and compute our loss with some initial random w and b.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert data into features, labels</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">feature_dim</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># initialize our paramaters</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">feature_dim</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># define loss</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">labels</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1"># test it out</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DeviceArray(554111.4, dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wow! Our loss is terrible, especially considering that solubilities are between -13 and 2. But, that’s right since we just guessed our initial parameters.</p>
+</section>
+<section id="gradient-descent">
+<h3>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this heading">#</a></h3>
+<p>We will now try to reduce loss by using information about how it changes with respect to the adjustable parameters. If we write our loss as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-79a89faf-7c09-4018-9054-c6487a88fc44">
+<span class="eqno">(2)<a class="headerlink" href="#equation-79a89faf-7c09-4018-9054-c6487a88fc44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = \frac{1}{N}\sum_i^N \left[y_i - f(\vec{x}_i, \vec{w}, b)\right]^2
+\end{equation}\]</div>
+<p>This loss is called <strong>mean squared error</strong>, often abbreviated MSE. We can compute our loss gradients with respect to the adjustable parameters:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">jax.grad</p>
+<p><a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.html#jax.grad">jax.grad</a> computes an analytical derivative of a Python function.
+It takes two arguments: the function and which args to
+take the derivative of. For example, consider <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>, then <code class="docutils literal notranslate"><span class="pre">jax.grad(f,(1,2))</span></code>
+gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span>. Note too that
+<span class="math notranslate nohighlight">\(x\)</span> may be a tensor.</p>
+</aside>
+<div class="amsmath math notranslate nohighlight" id="equation-844c5be0-4719-4e45-8a0e-ed997b755470">
+<span class="eqno">(3)<a class="headerlink" href="#equation-844c5be0-4719-4e45-8a0e-ed997b755470" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \frac{\partial L}{\partial w_i}, \frac{\partial L}{\partial b}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th element of the weight vector <span class="math notranslate nohighlight">\(\vec{w}\)</span>. We can reduce the loss by taking a step in the direction of its negative gradient:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3503549d-b6c1-447b-88cd-d2694595bb39">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3503549d-b6c1-447b-88cd-d2694595bb39" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    (w_i, b') = \left(w_i - \eta \frac{\partial L}{\partial w_i}, b - \eta\frac{\partial L}{\partial b}\right)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta\)</span> is <strong>learning rate</strong>, which an adjustable but not trained parameter (an example of a <strong>hyperparameter</strong>) which we just guess to be <span class="math notranslate nohighlight">\(1\times10^{-6}\)</span> in this example. Typically, it’s chosen to be some power of 10 that is at most 0.1. Values higher than that cause stability problems. Let’s try this procedure, which is called <strong>gradient descent</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute gradients</span>
+<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># test it out</span>
+<span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(DeviceArray([4.34213906e+05, 2.99283130e+03, 1.09366477e+05,
+              2.90330176e+04, 6.03893506e+03, 1.46635278e+03,
+              8.63276855e+03, 6.12605518e+03, 1.52025359e+05,
+              2.27809106e+03, 3.70779419e+02, 6.98108032e+02,
+              2.97619263e+03, 1.00468695e+05, 1.80537688e+05,
+              1.86782349e+03, 1.06673350e+06], dtype=float32),
+ DeviceArray(949.38837, dtype=float32, weak_type=True))
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve computed the gradient. Now we’ll minimize it over a few steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Full Dataset Training Curve&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dc17a0297e128cca0001b6e9d323e7d89ec2fed53ce87a9d7b658bad5b7c889e.png" src="../../_images/dc17a0297e128cca0001b6e9d323e7d89ec2fed53ce87a9d7b658bad5b7c889e.png" />
+</div>
+</div>
+</section>
+<section id="training-curve">
+<h3>Training Curve<a class="headerlink" href="#training-curve" title="Permalink to this heading">#</a></h3>
+<p>The figure above is called a <strong>training curve</strong>. We’ll see these frequently in this book and they show us if the loss is decreasing, indicating the model is learning. Training curves are also called <strong>learning curves</strong>. The x-axis may be example number, total iterations through dataset (called <strong>epochs</strong>), or some other measure of amount of data used for training the model.</p>
+</section>
+<section id="batching">
+<h3>Batching<a class="headerlink" href="#batching" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title">batch</p>
+<p>A batch is a subset of your data of size <em>batch size</em>. Batch size is usually as a power of 2 (e.g., 16, 128).
+Having random batches of data is how gradient descent becomes stochastic gradient descent.</p>
+</aside>
+<p>This is making good progress. But let’s try to speed things up with a small change. We’ll use <strong>batching</strong>, which is how training is actually done in machine learning.  The small change is that rather than using all data at once, we only take a small <strong>batch</strong> of data. Batching provides two benefits: it reduces the amount of time to compute an update to our parameters, and it makes the training process random. The randomness makes it possible to escape local minima that might stop training progress. This addition of batching makes our algorithm <strong>stochastic</strong> and thus we call this procedure <strong>stochastic gradient descent</strong> (SGD). SGD, and variations of it, are the most common methods of training in deep learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize our paramaters</span>
+<span class="c1"># to be fair to previous method</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">feature_dim</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># number of data points</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="c1"># compute how much data fits nicely into a batch and drop extra data</span>
+<span class="n">new_N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="n">batch_size</span>
+
+<span class="c1"># the -1 means that numpy will compute</span>
+<span class="c1"># what that dimension should be</span>
+<span class="n">batched_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">feature_dim</span><span class="p">))</span>
+<span class="n">batched_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">))</span>
+<span class="c1"># to make it random, we&#39;ll iterate over the batches randomly</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">new_N</span> <span class="o">//</span> <span class="n">batch_size</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+    <span class="c1"># choose a random set of</span>
+    <span class="c1"># indices to slice our data</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">batched_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">batched_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># we still compute loss on whole dataset, but not every step</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">))</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">loss_progress</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Batched Loss Curve&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/751a8c5898e98f520a704519c93762feea62563e438e3b223ec35d8561d2bfb2.png" src="../../_images/751a8c5898e98f520a704519c93762feea62563e438e3b223ec35d8561d2bfb2.png" />
+</div>
+</div>
+<p>There are three changes to note:</p>
+<ol class="arabic simple">
+<li><p>The loss is lower than without batching</p></li>
+<li><p>There are more steps, even though we iterated over our dataset once instead of 10 times</p></li>
+<li><p>The loss doesn’t always go down</p></li>
+</ol>
+<p>The reason the loss is lower is because we’re able to take more steps even though we only see each data point once. That’s because we update at each batch, giving more updates per iteration over the dataset. Specifically if <span class="math notranslate nohighlight">\(B\)</span> is batch size, there are <span class="math notranslate nohighlight">\(N / B\)</span> updates for every 1 update in the original gradient descent. The reason the loss doesn’t always go down is that each time we evaluate it, it’s on a different set of data. Some molecules are harder to predict than others. Also, each step we take in minimizing loss may not be correct because we only updated our parameters based on one batch. Assuming our batches are mixed though, we will always improve in expectation (on average).</p>
+</section>
+<section id="standardize-features">
+<h3>Standardize features<a class="headerlink" href="#standardize-features" title="Permalink to this heading">#</a></h3>
+<p>It seems we cannot get past a certain loss. If you examine the gradients you’ll see some of them are very large and some are very small. Each of the features have different magnitudes. For example, molecular weights are large numbers. The number of rings in a molecule is a small number. Each of these must use the same learning rate, <span class="math notranslate nohighlight">\(\eta\)</span>, and that is ok for some but too small for others. If we increase <span class="math notranslate nohighlight">\(\eta\)</span>, our training procedure will explode because of these larger feature gradients. A standard trick we can do is make all the features have the same magnitude, using the equation for standardization you might see in your statistics textbook:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a8f195ef-247b-4fd3-af90-b89715e95919">
+<span class="eqno">(5)<a class="headerlink" href="#equation-a8f195ef-247b-4fd3-af90-b89715e95919" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    x_{ij} = \frac{x_{ij} - \bar{x_j}}{\sigma_{x_j}}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{x_j}\)</span> is column mean and <span class="math notranslate nohighlight">\(\sigma_{x_j}\)</span> is column standard deviation. To be careful about contaminating <strong>training data</strong> with <strong>test data</strong> – leaking information between train and test data – we should only use training data in computing the mean and standard deviation. We want our test data to approximate how we’ll use our model on unseen data, so we cannot know what these unseen features means/standard deviations might be and thus cannot use them at training time for standardization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fstd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">std_features</span> <span class="o">=</span> <span class="p">(</span><span class="n">features</span> <span class="o">-</span> <span class="n">fmean</span><span class="p">)</span> <span class="o">/</span> <span class="n">fstd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize our paramaters</span>
+<span class="c1"># since we&#39;re changing the features</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">feature_dim</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+
+<span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-2</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># number of data points</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">std_features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="c1"># compute how much data fits nicely into a batch</span>
+<span class="c1"># and drop extra data</span>
+<span class="n">new_N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="n">batch_size</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># the -1 means that numpy will compute</span>
+<span class="c1"># what that dimension should be</span>
+<span class="n">batched_features</span> <span class="o">=</span> <span class="n">std_features</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">feature_dim</span><span class="p">))</span>
+<span class="n">batched_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">))</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">new_N</span> <span class="o">//</span> <span class="n">batch_size</span><span class="p">)</span>
+
+<span class="c1"># iterate through the dataset 3 times</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="c1"># to make it random, we&#39;ll iterate over the batches randomly</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="c1"># choose a random set of</span>
+        <span class="c1"># indices to slice our data</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">batched_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">batched_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># we still compute loss on whole dataset, but not every step</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">))</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span> <span class="n">loss_progress</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a6a249932b826b42cdbdaae1cb3584437d72ee4677ba7014fe54365d52cee0d8.png" src="../../_images/a6a249932b826b42cdbdaae1cb3584437d72ee4677ba7014fe54365d52cee0d8.png" />
+</div>
+</div>
+<p>Notice we safely increased our learning rate to 0.01, which is possible because all the features are of similar magnitude. We also could keep training, since we’re gaining improvements.</p>
+</section>
+<section id="analyzing-model-performance">
+<h3>Analyzing Model Performance<a class="headerlink" href="#analyzing-model-performance" title="Permalink to this heading">#</a></h3>
+<p>This is a large topic that we’ll explore more, but the first thing we typically examine in supervised learning is a <strong>parity plot</strong>, which shows our predictions vs. our label prediction. What’s nice about this plot is that it works no matter what the dimensions of the features are. A perfect fit would fall onto the line at <span class="math notranslate nohighlight">\(y = \hat{y}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predicted_labels</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">std_features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Measured Solubility $y$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted Solubility $\hat</span><span class="si">{y}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">13.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">13.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5a8ef168bba2bc576259bad48c86fab2d2092b5fea09f1e4ced273a011d884aa.png" src="../../_images/5a8ef168bba2bc576259bad48c86fab2d2092b5fea09f1e4ced273a011d884aa.png" />
+</div>
+</div>
+<p>Final model assessment can be done with loss, but typically other metrics are also used. In regression, a <strong>correlation coefficient</strong> is typically reported in addition to loss. In our example, this is computed as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># slice correlation between predict/labels from correlation matrix</span>
+<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7004027073276268
+</pre></div>
+</div>
+</div>
+</div>
+<p>A correlation coefficient of  is OK, but not great.</p>
+</section>
+</section>
+<section id="unsupervised-learning">
+<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this heading">#</a></h2>
+<p>In unsupervised learning, the goal is to predict <span class="math notranslate nohighlight">\(\hat{y}\)</span> <em>without</em> labels. This seems like an impossible task. How do we judge success? Typically, unsupervised learning can be broken into three categories:</p>
+<p><strong>Clustering</strong></p>
+<p>     Here we assume <span class="math notranslate nohighlight">\(\{y_i\}\)</span> is a class variable and try to partition our features into these classes. In clustering we are simultaneously learning the definition of the classes (called clusters) and which cluster each feature should be assigned to.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Class</p>
+<p>In machine learning, a class is a type of label like <code class="docutils literal notranslate"><span class="pre">dog</span></code> or <code class="docutils literal notranslate"><span class="pre">cat</span></code>. Formally,
+we have a set of possible labels (e.g., all animals) and each feature vector has one (hard) or a
+probability distribution of classes (soft).</p>
+</aside>
+<p><strong>Finding Signal</strong></p>
+<p>     <span class="math notranslate nohighlight">\(x\)</span> is assumed to be made of two components: noise and signal (<span class="math notranslate nohighlight">\(y\)</span>). We try to separate the signal <span class="math notranslate nohighlight">\(y\)</span> from <span class="math notranslate nohighlight">\(x\)</span> and discard noise. Highly-related with <strong>representation learning</strong>, which we’ll see later.</p>
+<p><strong>Generative</strong></p>
+<p>     Generative methods are methods where we try to learn <span class="math notranslate nohighlight">\(P(\vec{x})\)</span> so that we can sample new values of <span class="math notranslate nohighlight">\(\vec{x}\)</span>. It is analogous to <span class="math notranslate nohighlight">\(y\)</span> being probability and we’re trying to estimate it. We’ll see these more later.</p>
+<section id="clustering">
+<h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h3>
+<p>Clustering is historically one of the most well-known and still popular machine learning methods. It’s always popular because it can provide new insight from data. Clustering gives class labels where none existed and thus can help find patterns in data. This is also a reason that it has become less popular in chemistry (and most fields): there is no right or wrong answer. Two people doing clustering independently will often arrive at different answers. Nevertheless, it should be a tool you know and can be a good exploration strategy.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">cluster labels</p>
+<p>Clustering comes in many variants and some blur what exactly <span class="math notranslate nohighlight">\(y_i\)</span> is. For example, in some clustering methods <span class="math notranslate nohighlight">\(y_i\)</span> can include no assignment or <span class="math notranslate nohighlight">\(y_i\)</span> is not a single class, but a tree of classes.</p>
+</aside>
+<p>We’ll look at the classic clustering method: k-means. Wikipedia has a <a class="reference external" href="https://en.wikipedia.org/wiki/K-means_clustering">great article</a> on this classic algorithm, so I won’t try to repeat that. To make our clustering actually visible, we’ll start by projecting our features into 2 dimensions. This will be covered in representation learning, so don’t worry about these steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get down to 2 dimensions for easy visuals</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">manifold</span><span class="o">.</span><span class="n">Isomap</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># only fit to every 25th point to make it fast</span>
+<span class="n">embedding</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">std_features</span><span class="p">[::</span><span class="mi">25</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">reduced_features</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">std_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re going to zoom into the middle 99th percentile of the data since some of the points are extremely far away (though that is interesting!).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xlow</span><span class="p">,</span> <span class="n">xhi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">reduced_features</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">reduced_features</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">reduced_features</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlow</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xhi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">xlow</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xhi</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Solubility&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3c47a5541c476e48ec2860a7d8b769608b4c59a0da0f53d1f2ee24d55d6aef29.png" src="../../_images/3c47a5541c476e48ec2860a7d8b769608b4c59a0da0f53d1f2ee24d55d6aef29.png" />
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Dimensionality Reduction</p>
+<p>Reducing <span class="math notranslate nohighlight">\(\vec{x}\)</span>, your feature vectors to a low
+dimensional space. The classic example is PCA, which is a
+linear operator. However, most prefer nonlinear methods
+like <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html">t-SNE</a>.</p>
+</aside>
+<p>The dimensionality reduction has made our features only 2 dimensions. We can see some structure, especially with the solubility as the coloring. Note in these kind of plots, where we have reduced dimensions in someway, we do not label the axes because they are arbitrary.</p>
+<p>Now we cluster. The main challenge in clustering is deciding how many clusters there should be. There are a number of methods out there, but they basically come down to intuition. You, as the chemist, should use some knowledge outside of the data to intuit what is the cluster number. Sounds unscientific? Yeah, that’s why clustering is hard.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster - using whole features</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">std_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Very simple procedure! Now we’ll visualize by coloring our data by the class assigned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point_colors</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">reduced_features</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">reduced_features</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">point_colors</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># make legend</span>
+<span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Class </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlow</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xhi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">xlow</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xhi</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/84c7f0f12d80027ec3b08f2bc9958c15ac0b33dd7a898bab568e500625d42855.png" src="../../_images/84c7f0f12d80027ec3b08f2bc9958c15ac0b33dd7a898bab568e500625d42855.png" />
+</div>
+</div>
+</section>
+<section id="choosing-cluster-number">
+<h3>Choosing Cluster Number<a class="headerlink" href="#choosing-cluster-number" title="Permalink to this heading">#</a></h3>
+<p>How do we know we had the correct number? Intuition. There is one tool we can use to help us, called an <strong>elbow plot</strong>. The k-means clusters can be used to compute the mean squared distance from cluster center, basically a version of loss function. However, if we treat cluster number as a trainable parameter we’d find the best fit at the cluster number being equal to number of data points. Not helpful! However, we can see when the slope of this loss becomes approximately constant and assume that those extra clusters are adding no new insight. Let’s plot the loss and see what happens. Note we’ll be using a subsample of the dataset to save time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make an elbow plot</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">cn</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cn</span><span class="p">:</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># use every 50th point</span>
+    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">std_features</span><span class="p">[::</span><span class="mi">50</span><span class="p">])</span>
+    <span class="c1"># we get score -&gt; opposite of loss</span>
+    <span class="c1"># so take -</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">kmeans</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">std_features</span><span class="p">[::</span><span class="mi">50</span><span class="p">]))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cn</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cluster Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Elbow Plot&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/814705ee769c150f0b0f2a7a48b7494ca507ba54205f93bb60844c27d4ec74d3.png" src="../../_images/814705ee769c150f0b0f2a7a48b7494ca507ba54205f93bb60844c27d4ec74d3.png" />
+</div>
+</div>
+<p>Where is the transition? If I squint, maybe at 6? 3? 4? 7? Let’s choose 4 because it sounds nice and is plausible based on the data. The last task is to get some insight into what the clusters actually are. We can extract the most centered data points (closest to cluster center) and consider them to be representative of the cluster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster - using whole features</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">std_features</span><span class="p">)</span>
+
+<span class="n">cluster_center_idx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">:</span>
+    <span class="c1"># find point closest</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">std_features</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">cluster_center_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">cluster_centers</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cluster_center_idx</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">legend_text</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Class </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+
+<span class="c1"># now plot them on a grid</span>
+<span class="n">cluster_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span> <span class="k">for</span> <span class="n">inchi</span> <span class="ow">in</span> <span class="n">cluster_centers</span><span class="o">.</span><span class="n">InChI</span><span class="p">]</span>
+<span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
+    <span class="n">cluster_mols</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="n">legends</span><span class="o">=</span><span class="n">legend_text</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d921284c884e1640d23e8e128193c0fbce8d71fbddd6f6134cdb85cf3b434cc1.png" src="../../_images/d921284c884e1640d23e8e128193c0fbce8d71fbddd6f6134cdb85cf3b434cc1.png" />
+</div>
+</div>
+<p>So what exactly are these classes? Unclear. We intentionally did not reveal solubility (unsupervised learning) so there is not necessarily any connection with solubility. These classes are more a result of which features were chosen for the dataset. You could make a hypothesis, like class 1 is all negatively charged or class 0 is aliphatic, and investigate. Ultimately though there is no <em>best</em> clustering and often unsupervised learning is more about finding insight or patterns and not about producing a highly-accurate model.</p>
+<p>The elbow plot method is one of many approaches to selecting cluster number <span id="id2">[]</span>. I prefer it because it’s quite clear that you are using intuition. More sophisticated methods sort-of conceal the fact that there is no right or wrong answer in clustering.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This process does not result in a function that predicts solubility. We might try to gain insight about predicting solubility with our predicted classes, but that is not the goal of clustering.</p>
+</div>
+</section>
+</section>
+<section id="chapter-summary">
+<h2>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Supervised machine learning is building models that can predict labels <span class="math notranslate nohighlight">\(y\)</span> from input features <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></li>
+<li><p>Data can be labeled or unlabeled.</p></li>
+<li><p>Models are trained by minimizing loss with stochastic gradient descent.</p></li>
+<li><p>Unsupervised learning is building models that can find patterns in data.</p></li>
+<li><p>Clustering is unsupervised learning where the model groups the data points into clusters</p></li>
+</ul>
+</section>
+<section id="cited-references">
+<h2>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this heading">#</a></h2>
+<span class="target" id="id3"></span></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook/0_basic_MLDL"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_0_ml_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1_2_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regression &amp; Model Assessment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-correlation">Feature Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-curve">Training Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize-features">Standardize features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-model-performance">Analyzing Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-cluster-number">Choosing Cluster Number</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By thangckt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
