@@ -19,7 +19,7 @@ only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
-  - references.bib
+  - notebook/reference.bib
 
 #######################################################################################
 # Parse and render settings

@@ -2,3 +2,4 @@ jupyter-book  #==0.11.3
 ghp-import
 jinja2
 # git+https://github.com/executablebooks/jupyter-book@master
+docutils==0.17.1
